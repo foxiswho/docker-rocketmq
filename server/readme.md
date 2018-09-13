@@ -1,0 +1,1 @@
+https://github.com/apache/rocketmq-externals/tree/master/rocketmq-docker/4.2.0/rocketmq-namesrv
