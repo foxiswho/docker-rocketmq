@@ -47,7 +47,7 @@ RUN cd /  \
  && unzip rocketmq.zip \
  && rm -rf rocketmq-all*.zip \
  && rm -rf rocketmq.zip \
- && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release/*  ${ROCKETMQ_HOME}/* \
+ && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release/*  ${ROCKETMQ_HOME}/ \
  && rm -rf rocketmq-all*  \
  && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
  && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
