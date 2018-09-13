@@ -45,6 +45,9 @@ RUN cd /  \
  && rm -rf rocketmq.zip \
  && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release/*  ${ROCKETMQ_HOME}/* \
  && rm -rf rocketmq-all*  \
+ && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
+ && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
+ && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker  \
  && chmod -R +x ${ROCKETMQ_HOME}/bin/*
 
 # add scripts
