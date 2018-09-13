@@ -25,4 +25,4 @@ EXPOSE 10909 10911
 
 CMD cd ${ROCKETMQ_HOME}/bin \
  && export JAVA_OPT=" -Duser.home=/opt" \
- && sh mqbroker
+ && sh runbroker-customize
