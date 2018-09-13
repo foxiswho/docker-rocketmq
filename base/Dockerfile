@@ -58,6 +58,8 @@ RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
    && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker \
+   && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
+   && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker-customize.sh /usr/local/bin/runbroker-customize \
    && ln -s ${ROCKETMQ_HOME}/bin/runserver-customize.sh /usr/local/bin/runserver-customize
 
