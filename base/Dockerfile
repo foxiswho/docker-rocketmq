@@ -57,7 +57,6 @@ COPY scripts/ ${ROCKETMQ_HOME}/bin/
 RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
    && cd ${ROCKETMQ_HOME}/bin/  \
    && ls -alF  \
-   && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
