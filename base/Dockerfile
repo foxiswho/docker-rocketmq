@@ -19,27 +19,32 @@
 #FROM java:8
 FROM centos:7
 
-RUN yum install -y java-1.8.0-openjdk-headless unzip gettext nmap-ncat openssl\
- && yum clean all -y
-
 # Rocketmq version
 ENV ROCKETMQ_VERSION "4.3.0"
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
 
-WORKDIR  ${ROCKETMQ_HOME}
+RUN yum install -y java-1.8.0-openjdk-headless unzip gettext nmap-ncat openssl\
+ && yum clean all -y
 
 RUN mkdir -p \
  /opt/logs \
  /opt/store
 
+RUN mkdir -p ${ROCKETMQ_HOME}
+
+
+WORKDIR  ${ROCKETMQ_HOME}
+
 # get the version
-RUN curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
+RUN cd /  \
+ && curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
  && unzip rocketmq.zip \
  && rm -rf rocketmq-all*.zip \
  && rm -rf rocketmq.zip \
- && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release  ${ROCKETMQ_HOME} \
+ && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release/*  ${ROCKETMQ_HOME}/* \
+ && rm -rf rocketmq-all*  \
  && chmod -R +x ${ROCKETMQ_HOME}/bin/*
 
 # add scripts
