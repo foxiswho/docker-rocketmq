@@ -5,16 +5,18 @@ rocketmq
 rocketmq Version 4.3.0
 
 # server
+```SHELL
 docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server
+```
 
 # broker
-
+```SHELL
 docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:namesrv -e "NAMESRV_ADDR=namesrv:9876" foxiswho/rocketmq:broker
-
+```
 
 
 # console
-
+来自
 https://hub.docker.com/r/styletang/rocketmq-console-ng/
 
 ```SEHLL
@@ -22,10 +24,12 @@ docker run --link rmqserver:namesrv -e "JAVA_OPTS=-Drocketmq.namesrv.addr=IP地�
 ```
 
 浏览器访问
-```angular2html
+```SEHLL
 localhost:8180
 ```
 
 Example:
-
+```SEHLL
 docker run --link rmqserver:namesrv -e "JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 8180:8080 -t styletang/rocketmq-console-ng
+```
+
