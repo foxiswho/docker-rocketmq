@@ -25,6 +25,10 @@ ENV ROCKETMQ_VERSION "4.3.0"
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
 
+#tme zone
+RUN rm -rf /etc/localtime \
+&& ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 RUN yum install -y java-1.8.0-openjdk-headless unzip gettext nmap-ncat openssl\
  && yum clean all -y
 
