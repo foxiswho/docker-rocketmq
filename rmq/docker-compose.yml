@@ -13,7 +13,10 @@ services:
     volumes:
       - ./data/logs:/opt/logs
       - ./data/store:/opt/store
-
+    networks:
+        rmq:
+          aliases:
+            - rmqnamesrv
   rmqbroker:
     image: foxiswho/rocketmq:broker
     container_name: rmqbroker
@@ -29,6 +32,10 @@ services:
       - ./data/store:/opt/store
     depends_on:
       - rmqnamesrv
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker
 
   rmqconsole:
     image: styletang/rocketmq-console-ng
@@ -39,6 +46,10 @@ services:
       - JAVA_OPTS=-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
     depends_on:
       - rmqnamesrv
+    networks:
+      rmq:
+        aliases:
+          - rmqconsole
 
 networks:
   rmq:
