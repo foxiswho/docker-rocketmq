@@ -38,9 +38,14 @@ RUN mkdir -p \
 RUN curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
  && unzip rocketmq.zip \
  && rm -rf rocketmq-all*.zip \
- && rm -rf rocketmq.zip
+ && rm -rf rocketmq.zip \
+ && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release  ${ROCKETMQ_HOME} \
+ && chmod -R +x ${ROCKETMQ_HOME}/bin/*
 
 # add scripts
 COPY scripts/ ${ROCKETMQ_HOME}/bin/
+
+RUN chmod -R +x ${ROCKETMQ_HOME}/bin/*
+
 
 VOLUME /opt/logs /opt/store
