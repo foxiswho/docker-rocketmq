@@ -33,3 +33,15 @@ Example:
 docker run --link rmqserver:namesrv -e "JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 8180:8080 -t styletang/rocketmq-console-ng
 ```
 
+# docker-compose
+
+```SHELL
+cd rmq
+
+docker-compose up
+
+```
+访问浏览器
+```SHELL
+localhost:8180
+```
