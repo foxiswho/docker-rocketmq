@@ -1,0 +1,46 @@
+version: '3.5'
+
+services:
+  rmqnamesrv:
+    image: foxiswho/rocketmq:server
+    container_name: rmqnamesrv
+#    build:
+#      context: ./rocketmq-namesrv
+#      args:
+#      - version=4.3.0
+    ports:
+      - 9876:9876
+    volumes:
+      - ./data/logs:/opt/logs
+      - ./data/store:/opt/store
+
+  rmqbroker:
+    image: foxiswho/rocketmq:broker
+    container_name: rmqbroker
+#    build:
+#      context: ./rocketmq-broker
+#      args:
+#      - version=4.3.0
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./data/logs:/opt/logs
+      - ./data/store:/opt/store
+    depends_on:
+      - rmqnamesrv
+
+  rmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: rmqconsole
+    ports:
+      - 8180:8080
+    environment:
+      - JAVA_OPTS=-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    depends_on:
+      - rmqnamesrv
+
+networks:
+  rmq:
+    name: rmq
+    driver: bridge
