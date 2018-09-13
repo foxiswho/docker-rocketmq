@@ -25,4 +25,4 @@ EXPOSE 9876
 
 CMD cd ${ROCKETMQ_HOME}/bin \
  && export JAVA_OPT=" -Duser.home=/opt" \
- && sh runserver-customize
+ && ${ROCKETMQ_HOME}/bin/mqnamesrv
