@@ -1,8 +1,11 @@
+# tag
+- server , broker , latest ( 最新版 , new)
+- server-4.3.0 , broker-4.3.0
+
 # docker-rocketmq
 rocketmq
 
-
-rocketmq Version 4.3.0
+rocketmq Version 4.3.0 , 4.3.2
 
 # server
 ```SHELL
@@ -16,7 +19,9 @@ docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:na
 
 ## broker 配置文件位置 (容器内)
 
+```SHELL
 /etc/rocketmq/broker.conf
+```
 
 ## 使用自己的配置文件
 请全部复制到shell 中执行
@@ -28,7 +33,7 @@ docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:na
 -v /User/fox/rmq/conf/broker.conf:/etc/rocketmq/broker.conf \
 foxiswho/rocketmq:broker
 ```
-/User/fox/rmq/conf/broker.conf 为我的本地配置文件目录
+>/User/fox/rmq/conf/broker.conf 为我的本地配置文件目录
 
 # console
 来自
