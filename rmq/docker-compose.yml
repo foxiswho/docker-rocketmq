@@ -22,7 +22,7 @@ services:
     volumes:
       - ./data/logs:/opt/logs
       - ./data/store:/opt/store
-      - ./data/conf/broker.conf:/etc/rocketmq/broker.conf:ro
+      - ./data/conf/broker.conf:/etc/rocketmq/broker.conf
     environment:
         NAMESRV_ADDR: "rmqnamesrv:9876"
         JAVA_OPTS: " -Duser.home=/opt"
