@@ -65,3 +65,7 @@ docker-compose up
 ```SHELL
 localhost:8180
 ```
+
+# 其他案例
+
+https://github.com/foxiswho/docker-consul-fabio-apollo-rocketmq-rabbitmq
