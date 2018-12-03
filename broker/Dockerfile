@@ -27,3 +27,6 @@ CMD cd ${ROCKETMQ_HOME}/bin \
  && export JAVA_OPT=" -Duser.home=/opt" \
  && export NAMESRV_ADDR="namesrv:9876" \
  && ${ROCKETMQ_HOME}/bin/mqbroker -c /etc/rocketmq/broker.conf
+
+
+# broker 配置文件位于 /etc/rocketmq/broker.conf ，具体请看 broker Dockerfile CMD启动

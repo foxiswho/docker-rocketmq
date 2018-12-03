@@ -59,6 +59,7 @@ RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
    && ls -alF  \
    && mkdir -p /etc/rocketmq \
    && cp -rf ${ROCKETMQ_HOME}/conf/broker.conf  /etc/rocketmq/ \
+   && mv ${ROCKETMQ_HOME}/conf/broker.conf ${ROCKETMQ_HOME}/conf/broker.conf.old \
    && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
@@ -66,5 +67,6 @@ RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker-customize.sh /usr/local/bin/runbroker-customize.sh \
    && ln -s ${ROCKETMQ_HOME}/bin/runserver-customize.sh /usr/local/bin/runserver-customize.sh
 
+# broker 配置文件位于 /etc/rocketmq/broker.conf ，具体请看 broker Dockerfile CMD启动
 
 VOLUME /opt/logs /opt/store
