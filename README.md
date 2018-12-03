@@ -18,6 +18,18 @@ docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:na
 
 /etc/rocketmq/broker.conf
 
+## 使用自己的配置文件
+请全部复制到shell 中执行
+```SHELL
+docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:namesrv \
+-e "NAMESRV_ADDR=namesrv:9876" \
+-e "JAVA_OPTS=-Duser.home=/opt"  \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-v /User/fox/rmq/conf/broker.conf:/etc/rocketmq/broker.conf \
+foxiswho/rocketmq:broker
+```
+/User/fox/rmq/conf/broker.conf 为我的本地配置文件目录
+
 # console
 来自
 https://hub.docker.com/r/styletang/rocketmq-console-ng/
