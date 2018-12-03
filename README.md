@@ -14,6 +14,9 @@ docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server
 docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:namesrv -e "NAMESRV_ADDR=namesrv:9876" -e "JAVA_OPTS=-Duser.home=/opt"  -e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" foxiswho/rocketmq:broker
 ```
 
+## broker 配置文件位置 (容器内)
+
+/etc/rocketmq/broker.conf
 
 # console
 来自
