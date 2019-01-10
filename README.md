@@ -67,6 +67,13 @@ docker-compose up
 localhost:8180
 ```
 
+>注意 如果你的微服务或者项目在开发的时候没有放入`docker`中或者与`rocketmq`容器不能直接用IP访问，
+那么请把`broker.conf`中的 `#brokerIP1=192.168.0.253` 前面`#`号去掉，并且把后面的`IP地址`改成你的`rocketmq`容器宿主机`IP地址`,
+否则报 `com.alibaba.rocketmq.remoting.exception.RemotingConnectException: connect to <172.0.0.120:10909> failed`
+
+
 # 其他案例
+
+https://github.com/foxiswho/docker-nacos-sentinel-rocketmq-rabbitmq
 
 https://github.com/foxiswho/docker-consul-fabio-apollo-rocketmq-rabbitmq
