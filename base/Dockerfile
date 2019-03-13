@@ -20,7 +20,7 @@
 FROM centos:7
 
 # Rocketmq version
-ENV ROCKETMQ_VERSION "4.3.2"
+ENV ROCKETMQ_VERSION "4.4.0"
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
@@ -66,6 +66,8 @@ RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
    && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker-customize.sh /usr/local/bin/runbroker-customize.sh \
    && ln -s ${ROCKETMQ_HOME}/bin/runserver-customize.sh /usr/local/bin/runserver-customize.sh
+
+RUN sed -i 's/${JAVA_HOME}\/jre\/lib\/ext/${JAVA_HOME}\/jre\/lib\/ext:${JAVA_HOME}\/lib\/ext/' ${ROCKETMQ_HOME}/bin/tools.sh
 
 # broker 配置文件位于 /etc/rocketmq/broker.conf ，具体请看 broker Dockerfile CMD启动
 
