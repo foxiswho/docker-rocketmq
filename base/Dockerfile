@@ -20,7 +20,7 @@
 FROM centos:7
 
 # Rocketmq version
-ENV ROCKETMQ_VERSION "4.4.0"
+ENV ROCKETMQ_VERSION "4.5.0"
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
