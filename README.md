@@ -36,6 +36,13 @@ foxiswho/rocketmq:broker
 ```
 >/User/fox/rmq/conf/broker.conf 为我的本地配置文件目录
 
+注意（重要的事说3遍）
+注意（重要的事说3遍）
+注意（重要的事说3遍）
+
+如果你的微服务没有使用`docker`,那么需要把`/etc/rocketmq/broker.conf` 配置文件中的`brokerIP1=192.168.0.253` 这个启用，IP 地址填写 你docker 所在 宿主机的IP ，否则报错
+
+
 # console
 来自
 https://hub.docker.com/r/styletang/rocketmq-console-ng/
