@@ -1,5 +1,6 @@
 # tag
 - server , broker , latest ( 最新版 , new)
+- server-4.5.1 , broker-4.5.1
 - server-4.4.0 , broker-4.4.0
 - server-4.3.2 , broker-4.3.2
 - server-4.3.0 , broker-4.3.0
@@ -7,7 +8,7 @@
 # docker-rocketmq
 rocketmq
 
-rocketmq Version 4.3.0 , 4.3.2, 4.4.0
+rocketmq Version 4.3.0 , 4.3.2, 4.4.0, 4.5.1
 
 # server
 ```SHELL

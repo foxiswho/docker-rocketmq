@@ -20,7 +20,7 @@
 FROM centos:7
 
 # Rocketmq version
-ENV ROCKETMQ_VERSION "4.5.0"
+ENV ROCKETMQ_VERSION "4.5.1"
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
@@ -29,7 +29,7 @@ ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
 RUN rm -rf /etc/localtime \
 && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN yum install -y java-1.8.0-openjdk-headless unzip gettext nmap-ncat openssl\
+RUN yum install -y java-1.8.0-openjdk-headless unzip vim gettext nmap-ncat openssl\
  && yum clean all -y
 
 RUN mkdir -p \
@@ -60,12 +60,16 @@ RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
    && mkdir -p /etc/rocketmq \
    && cp -rf ${ROCKETMQ_HOME}/conf/broker.conf  /etc/rocketmq/ \
    && mv ${ROCKETMQ_HOME}/conf/broker.conf ${ROCKETMQ_HOME}/conf/broker.conf.old \
+   && mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh  \
+   && mv -bf ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh  \
    && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
    && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker \
    && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
    && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
-   && ln -s ${ROCKETMQ_HOME}/bin/runbroker-customize.sh /usr/local/bin/runbroker-customize.sh \
-   && ln -s ${ROCKETMQ_HOME}/bin/runserver-customize.sh /usr/local/bin/runserver-customize.sh
+   && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker.sh \
+   && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver.sh \
+   && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker-customize.sh \
+   && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver-customize.sh
 
 RUN sed -i 's/${JAVA_HOME}\/jre\/lib\/ext/${JAVA_HOME}\/jre\/lib\/ext:${JAVA_HOME}\/lib\/ext/' ${ROCKETMQ_HOME}/bin/tools.sh
 

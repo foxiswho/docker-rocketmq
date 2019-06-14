@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-FROM foxiswho/rocketmq:base-4.5.0
+FROM foxiswho/rocketmq:base-4.5.1
 
 EXPOSE 9876
 
