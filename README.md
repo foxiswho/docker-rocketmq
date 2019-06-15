@@ -26,14 +26,16 @@ https://blog.csdn.net/fenglailea/article/details/88745642
 
 https://foxwho.blog.csdn.net/article/details/92137467
 
-# 目录
-
-请把项目放置到 `/www/k8s/foxdev/` 目录下，所有都是基于此目录
-
 # 服务器资源限制
 对CPU,内存都做了限制，请自行针对修改
 
 没有使用持久化存储，这里直接使用宿主机存储，如有需要，请自行增加
+
+# 目录
+
+请把项目放置到 `/www/k8s/foxdev/` 目录下，所有都是基于此目录
+
+或者请看 下面一节的 `拉取代码`
 
 # 拉取代码
 
