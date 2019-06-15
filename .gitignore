@@ -1,0 +1,10 @@
+.idea
+.DS_Store
+*.rej
+*.log
+*.current
+*.json
+
+docker/mysql-master/mysql
+docker/mysql-master/nacos*
+docker/mysql-master/performance*

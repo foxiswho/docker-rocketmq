@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rmqbroker-slave
+  labels:
+    app: rmqbroker-slave
+#  namespace: default
+spec:
+  serviceName: rmqbroker-slave
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rmqbroker-slave
+  template:
+    metadata:
+      labels:
+        app: rmqbroker-slave
+    spec:
+      containers:
+        - name: rmqbroker-slave
+          image: foxiswho/rocketmq:broker
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 250m
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: NAMESRV_ADDR
+              value: rocketmq:9876
+            - name: JAVA_OPT_EXT
+              value:  -Duser.home=/opt -server -Xms512m -Xmx512m -Xmn128m
+          command: ["mqbroker","-c","/etc/rocketmq/broker-s.conf","-n","rocketmq:9876","autoCreateTopicEnable=true"]
+          ports:
+            - containerPort: 10919
+            - containerPort: 10921
+            - containerPort: 10922
+          volumeMounts:
+            - name: vol-logs
+              mountPath: /opt/logs
+            - name: vol-store
+              mountPath: /opt/store
+            - name: vol-broker-s
+              mountPath: /etc/rocketmq/broker-s.conf
+      volumes:
+        - name: vol-logs
+          hostPath:
+            path: /www/k8s/foxdev/rocketmq/logs-b-s
+            type: Directory
+        - name: vol-store
+          hostPath:
+              path: /www/k8s/foxdev/rocketmq/store-b-s
+              type: Directory
+        - name: vol-broker-s
+          hostPath:
+              path: /www/k8s/foxdev/rocketmq/conf/broker-s.conf
+              type: File
