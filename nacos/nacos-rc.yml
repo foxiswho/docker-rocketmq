@@ -5,12 +5,15 @@ metadata:
 spec:
   serviceName: nacos
   replicas: 3
+  selector:
+    matchLabels:
+      app: nacos
   template:
     metadata:
       labels:
         app: nacos
       annotations:
-        pod.alpha.kubernetes.io/initialized: "true"
+        pod.beta.kubernetes.io/initialized: "true"
     spec:
       affinity:
         podAntiAffinity:
@@ -36,6 +39,16 @@ spec:
           env:
             - name: NACOS_REPLICAS
               value: "3"
+            - name: MYSQL_MASTER_SERVICE_HOST
+              valueFrom:
+                  configMapKeyRef:
+                    name: nacos-cm
+                    key: mysql.master.host
+            - name: MYSQL_SLAVE_SERVICE_HOST
+              valueFrom:
+                  configMapKeyRef:
+                    name: nacos-cm
+                    key: mysql.slave.host
             - name: MYSQL_MASTER_SERVICE_DB_NAME
               valueFrom:
                 configMapKeyRef:
@@ -75,6 +88,4 @@ spec:
           hostPath:
             path: /www/k8s/foxdev/nacos/logs-nacos
             type: Directory
-  selector:
-    matchLabels:
-      app: nacos
+

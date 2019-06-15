@@ -5,7 +5,7 @@ kind: Service
 metadata:
   name: mariadb
   labels:
-    name: mariadb
+    app: mariadb
 spec:
   type: NodePort
   ports:
@@ -13,4 +13,4 @@ spec:
       targetPort: 3306
       nodePort: 3306
   selector:
-    name: mariadb
+    app: mariadb

@@ -1,10 +1,10 @@
 ---
-apiVersion: v1
+apiVersion: V1
 kind: Service
 metadata:
   name: nacos
   labels:
-    app: nacos
+    app: nacos-headless
 spec:
   type: NodePort
   ports:
@@ -25,3 +25,5 @@ data:
   mysql.slave.port: "3306"
   mysql.master.user: "nacos"
   mysql.master.password: "nacos"
+  mysql.master.host: "mariadb-0.mariadb.default.svc.cluster.local"
+  mysql.slave.host: "mariadb-0.mariadb.default.svc.cluster.local"

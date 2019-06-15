@@ -23,5 +23,5 @@ kubectl delete -f  rocketmq-service.yml
 
 kubectl get pod
 
-echo "\ndelete success"
+echo -e "\ndelete success"
 

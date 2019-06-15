@@ -107,11 +107,11 @@ store-b:    Broker(master) store 目录
 store-b-s:  Broker(slave) store 目录
 
 ## 独立部署 rocketmq 操作
-直接执行 rocketmq 目录下 `rmq.start.sh` 即可
+直接执行 `根目录`下 `create.r.rocketmq.start.sh` 即可
 
 ```shell
 
-cd ./rocketmq/ && ./rmq.start.sh
+./create.r.rocketmq.start.sh
 
 ```
 
@@ -142,9 +142,21 @@ kubectl get rc
 
 暂时没有使用 主从，后期有空的时候再设置
 
+生成容器镜像后，会自动导入`nacos` 数据库配置文件，
+
+及创建 数据库`nacos`用户和密码`nacos`
+
 ## 相关参数说明
+
 端口 3306
 
+账号/密码
+
+root/root
+
+nacos/nacos
+
+>`nacos_devtest` 为 nacos 服务注册发现 数据库
 
 ## 目录
 
@@ -152,7 +164,14 @@ kubectl get rc
 >/www/k8s/foxdev/mariadb/mariadb.conf.d     数据库自定义配置文件目录
 
 
+## 独立部署 mariadb 操作
+直接执行 `根目录`下 `create.b.mariadb.start.sh` 即可
+
+```shell
+
+./create.b.mariadb.start.sh
+
+```
 
 
-
-
+执行完成后，即可用 数据库管理软件，进行操作数据库了
