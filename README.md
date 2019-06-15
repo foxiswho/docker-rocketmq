@@ -22,6 +22,10 @@ Kubernetes(K8s) 1.14.3
 
 https://blog.csdn.net/fenglailea/article/details/88745642
 
+常用 k8s 命令
+
+https://foxwho.blog.csdn.net/article/details/92137467
+
 # 目录
 
 请把项目放置到 `/www/k8s/foxdev/` 目录下，所有都是基于此目录
