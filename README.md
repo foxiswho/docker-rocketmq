@@ -137,6 +137,19 @@ kubectl get rc
 
 
 
+# k8s mariadb(mysql) 数据库独立部署
+采用 mariadb 最新 版本
+
+暂时没有使用 主从，后期有空的时候再设置
+
+## 相关参数说明
+端口 3306
+
+
+## 目录
+
+>/www/k8s/foxdev/mariadb/data               数据库文件目录
+>/www/k8s/foxdev/mariadb/mariadb.conf.d     数据库自定义配置文件目录
 
 
 
