@@ -35,6 +35,17 @@ https://foxwho.blog.csdn.net/article/details/92137467
 
 没有使用持久化存储，这里直接使用宿主机存储，如有需要，请自行增加
 
+# 拉取代码
+
+```shell
+mkdir -p /www/k8s/
+cd /www/k8s/
+
+git clone https://github.com/foxiswho/k8s-nacos-sentinel-rocketmq-zipkin-elasticsearch-redis-mysql.git foxdev
+
+cd foxdev
+```
+
 # 一键部署 即开即用服务
 
 待添加
@@ -95,6 +106,13 @@ store-b-s:  Broker(slave) store 目录
 
 ## 独立部署 rocketmq 操作
 直接执行 rocketmq 目录下 `rmq.start.sh` 即可
+
+```shell
+
+cd ./rocketmq/ && ./rmq.start.sh
+
+```
+
 
 大约几分钟后，使用rocketmq或者访问浏览器`http://192.168.0.254:8180`,即可看到 `rocketmq-console`的管理界面
 
