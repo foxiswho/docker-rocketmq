@@ -36,5 +36,5 @@ spec:
       volumes:
         - name: vol
           hostPath:
-              path: /www/k8s/foxdev/prometheus/prometheus-cluster.yaml
+              path: /www/k8s/foxdev/prometheus/conf/prometheus-cluster.yaml
               type: File
