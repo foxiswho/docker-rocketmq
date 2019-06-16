@@ -28,6 +28,10 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
+#            - name: SERVER_NAME
+#              value: kibana
+#            - name: ELASTICSEARCH_HOSTS
+#              value: http://elasticsearch-0.elasticsearch.default.svc.cluster.local:9200
           ports:
             - containerPort: 5601
           volumeMounts:

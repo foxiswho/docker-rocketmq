@@ -46,12 +46,23 @@ cd /www/k8s/
 git clone https://github.com/foxiswho/k8s-nacos-sentinel-rocketmq-zipkin-elasticsearch-redis-mysql.git foxdev
 
 cd foxdev
+
+chmod +x *sh
 ```
 
 # 一键部署 即开即用服务
+根目录下执行
 
-待添加
+```shell
+./all.start.sh
 
+```
+## 如果想全部删除
+
+```shell
+./all.stop.delete.sh
+
+```
 ---
 以下是 独立部署 相关模块
 ---
@@ -438,6 +449,11 @@ curl -XPOST http://192.168.0.254:9200/index/_search  -H 'Content-Type:applicatio
 
 # k8s kibana 独立部署
 必须先 部署好  elasticsearch
+
+
+官方 kibana docker 说明
+
+https://www.elastic.co/guide/en/kibana/current/docker.html
 ## 相关说明
 
 端口  5601
