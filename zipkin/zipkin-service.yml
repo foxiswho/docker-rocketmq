@@ -1,0 +1,17 @@
+
+
+apiVersion: v1
+kind: Service
+metadata:
+#  namespace: default
+  name: zipkin
+  labels:
+    name: zipkin
+spec:
+  type: NodePort
+  ports:
+    - port: 9411
+      targetPort: 9411
+      nodePort: 9411
+  selector:
+    name: zipkin

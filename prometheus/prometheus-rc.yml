@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+#  namespace: default
+  name: prometheus
+  labels:
+    name: prometheus
+spec:
+  replicas: 1
+  selector:
+    name: prometheus
+  template:
+    metadata:
+      labels:
+        name: prometheus
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 150m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: vol
+              mountPath: /etc/prometheus/prometheus.yml
+      volumes:
+        - name: vol
+          hostPath:
+              path: /www/k8s/foxdev/prometheus/prometheus-cluster.yaml
+              type: File

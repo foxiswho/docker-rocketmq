@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+#  namespace: default
+  name: sentinel
+  labels:
+    name: sentinel
+spec:
+  replicas: 1
+  selector:
+    name: sentinel
+  template:
+    metadata:
+      labels:
+        name: sentinel
+    spec:
+      containers:
+        - name: sentinel
+          image: foxiswho/sentinel
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 150m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: vol-log
+              mountPath: /opt/logs
+      volumes:
+        - name: vol-log
+          hostPath:
+            path: /www/k8s/foxdev/sentinel/logs
+            type: Directory

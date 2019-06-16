@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+DIR=$(pwd)
+
+echo "kubectl delete "
+
+rm -rf ${DIR}/sentinel/logs
+
+
+kubectl delete -f  ${DIR}/sentinel/sentinel-service.yml
+kubectl delete -f  ${DIR}/sentinel/sentinel-rc.yml
+
+kubectl get pod
+
+echo -e "\n\n\n"
+
+echo "success"
+
+
+
+

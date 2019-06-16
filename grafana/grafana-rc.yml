@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+#  namespace: default
+  name: grafana
+  labels:
+    name: grafana
+spec:
+  replicas: 1
+  selector:
+    name: grafana
+  template:
+    metadata:
+      labels:
+        name: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 150m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 3000
