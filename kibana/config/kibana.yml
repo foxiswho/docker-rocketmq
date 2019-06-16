@@ -4,4 +4,4 @@
 #
 server.name: kibana
 server.host: "0"
-elasticsearch.url: ["http://elasticsearch-0.elasticsearch.default.svc.cluster.local:9200"]
+elasticsearch.hosts: ["http://elasticsearch-0.elasticsearch.default.svc.cluster.local:9200"]
