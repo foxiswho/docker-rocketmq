@@ -510,3 +510,65 @@ sentinel/logs   日志目录
 ```bash
 http://192.168.0.254:8280
 ```
+
+# k8s zipkin 独立部署
+
+## 相关说明
+端口：9411
+
+## 独立部署 zipkin 操作
+直接执行 `根目录`下 `create.z.zipkin.start.sh` 即可
+
+```shell
+
+./create.z.zipkin.start.sh
+
+```
+## 访问
+
+直接用浏览器访问
+```bash
+http://192.168.0.254:9411
+```
+
+# k8s grafana 独立部署
+
+## 相关说明
+端口：3000
+
+## 独立部署 grafana 操作
+直接执行 `根目录`下 `create.g.grafana.start.sh` 即可
+
+```shell
+
+./create.g.grafana.start.sh
+
+```
+## 访问
+
+直接用浏览器访问
+```bash
+http://192.168.0.254:3000
+```
+
+# k8s prometheus 独立部署
+
+## 相关说明
+端口：9090
+
+prometheus/conf/prometheus-cluster.yaml 配置文件
+
+## 独立部署 prometheus 操作
+直接执行 `根目录`下 `create.p.prometheus.start.sh` 即可
+
+```shell
+
+./create.p.prometheus.start.sh
+
+```
+## 访问
+
+直接用浏览器访问
+```bash
+http://192.168.0.254:9090
+```
