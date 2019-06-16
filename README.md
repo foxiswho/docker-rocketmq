@@ -341,6 +341,10 @@ elasticsearch/data      数据目录
 ```bash
 curl -XPUT http://192.168.0.254:9200/index
 ```
+输出
+```bash
+{"acknowledged":true,"shards_acknowledged":true,"index":"index"}
+```
 ### 创建mapping
 ```bash
 curl -XPOST http://192.168.0.254:9200/index/_mapping -H 'Content-Type:application/json' -d'
@@ -355,39 +359,47 @@ curl -XPOST http://192.168.0.254:9200/index/_mapping -H 'Content-Type:applicatio
 
 }'
 ```
+输出
+```bash
+{"acknowledged":true}
+```
 ### 添加几条数据
 ```bash
-curl -XPOST http://192.168.0.254:9200/index/_create/1 -H 'Content-Type:application/json' -d'
+curl -XPOST http://192.168.0.254:9200/index/_create/1?pretty -H 'Content-Type:application/json' -d'
 {"content":"美国留给伊拉克的是个烂摊子吗"}
 '
 ```
+输出略
 
 ```bash
-curl -XPOST http://192.168.0.254:9200/index/_create/2 -H 'Content-Type:application/json' -d'
+curl -XPOST http://192.168.0.254:9200/index/_create/2?pretty -H 'Content-Type:application/json' -d'
 {"content":"公安部：各地校车将享最高路权"}
 '
 ```
 
 ```bash
-curl -XPOST http://192.168.0.254:9200/index/_create/3 -H 'Content-Type:application/json' -d'
+curl -XPOST http://192.168.0.254:9200/index/_create/3?pretty -H 'Content-Type:application/json' -d'
 {"content":"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"}
 '
 ```
 
 
 ```bash
-curl -XPOST http://192.168.0.254:9200/index/_create/3 -H 'Content-Type:application/json' -d'
-{"content":"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"}
+curl -XPOST http://192.168.0.254:9200/index/_create/4?pretty -H 'Content-Type:application/json' -d'
+{"content":"中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"}
 '
 ```
 
-curl -XPOST http://192.168.0.254:9200/index/_create/4 -H 'Content-Type:application/json' -d'
-{"content":"中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"}
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_create/5?pretty -H 'Content-Type:application/json' -d'
+{"content":"习近平结束对吉尔吉斯共和国、塔吉克斯坦共和国国事访问并出席上海合作组织成员国元首理事会第十九次会议、亚洲相互"}
 '
+```
+
 
 ### 查询
 ```bash
-curl -XPOST http://192.168.0.254:9200/index/_search  -H 'Content-Type:application/json' -d'
+curl -XPOST http://192.168.0.254:9200/index/_search?pretty  -H 'Content-Type:application/json' -d'
 {
     "query" : { "match" : { "content" : "中国" }},
     "highlight" : {
@@ -403,48 +415,53 @@ curl -XPOST http://192.168.0.254:9200/index/_search  -H 'Content-Type:applicatio
 输出
 ```bash
 {
-    "took": 14,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "failed": 0
+  "took" : 8,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
     },
-    "hits": {
-        "total": 2,
-        "max_score": 2,
-        "hits": [
-            {
-                "_index": "index",
-                "_type": "fulltext",
-                "_id": "4",
-                "_score": 2,
-                "_source": {
-                    "content": "中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"
-                },
-                "highlight": {
-                    "content": [
-                        "<tag1>中国</tag1>驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首 "
-                    ]
-                }
-            },
-            {
-                "_index": "index",
-                "_type": "fulltext",
-                "_id": "3",
-                "_score": 2,
-                "_source": {
-                    "content": "中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"
-                },
-                "highlight": {
-                    "content": [
-                        "均每天扣1艘<tag1>中国</tag1>渔船 "
-                    ]
-                }
-            }
-        ]
-    }
+    "max_score" : 0.6650044,
+    "hits" : [
+      {
+        "_index" : "index",
+        "_type" : "_doc",
+        "_id" : "3",
+        "_score" : 0.6650044,
+        "_source" : {
+          "content" : "中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"
+        },
+        "highlight" : {
+          "content" : [
+            "中韩渔警冲突调查：韩警平均每天扣1艘<tag1>中国</tag1>渔船"
+          ]
+        }
+      },
+      {
+        "_index" : "index",
+        "_type" : "_doc",
+        "_id" : "4",
+        "_score" : 0.6308529,
+        "_source" : {
+          "content" : "中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"
+        },
+        "highlight" : {
+          "content" : [
+            "<tag1>中国</tag1>驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"
+          ]
+        }
+      }
+    ]
+  }
 }
+
 ```
 
 # k8s kibana 独立部署
