@@ -1,5 +1,5 @@
 
-apiVersion: V1
+apiVersion: v1
 kind: Service
 metadata:
   name: nacos
