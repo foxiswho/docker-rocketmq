@@ -3,7 +3,8 @@
 DIR=$(pwd)
 
 
-mkdir -p ${DIR}/nacos/logs-nacos
+mkdir -p     ${DIR}/nacos/logs-nacos
+chmod -R 777 ${DIR}/nacos/logs-nacos
 
 
 

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  #  namespace: default
+  name: redis
+  labels:
+    app: redis
+spec:
+  serviceName: redis
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 150m
+              memory: 4000Mi
+            requests:
+              cpu: 100m
+              memory: 2000Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: vol-conf
+              mountPath: /usr/local/etc/redis
+            - name: vol-data
+              mountPath: /data
+      volumes:
+        - name: vol-conf
+          hostPath:
+            path: /www/k8s/foxdev/redis/conf
+            type: Directory
+        - name: vol-data
+          hostPath:
+              path: /www/k8s/foxdev/redis/data
+              type: Directory

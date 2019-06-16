@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  #  namespace: default
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  serviceName: elasticsearch
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - name: elasticsearch
+          image: foxiswho/elk:elasticsearch-7.1.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 350m
+              memory: 3Gi
+            requests:
+              cpu: 100m
+              memory: 2Gi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: ES_JAVA_OPTS
+              value: -Xmx2000m -Xmx2000m
+          ports:
+            - containerPort: 9200
+            - containerPort: 9300
+          volumeMounts:
+            - name: vol-logs
+              mountPath: /usr/share/elasticsearch/logs
+            - name: vol-data
+              mountPath: /usr/share/elasticsearch/data
+            - name: vol-plugins-analysis-ik
+              mountPath: /usr/share/elasticsearch/plugins/analysis-ik
+            - name: vol-es
+              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+            - name: vol-synonyms
+              mountPath: /usr/share/elasticsearch/config/synonyms.txt
+      volumes:
+        - name: vol-logs
+          hostPath:
+            path: /www/k8s/foxdev/elasticsearch/logs
+            type: Directory
+        - name: vol-data
+          hostPath:
+              path: /www/k8s/foxdev/elasticsearch/data
+              type: Directory
+        - name: vol-plugins-analysis-ik
+          hostPath:
+              path: /www/k8s/foxdev/elasticsearch/plugins/analysis-ik
+              type: Directory
+        - name: vol-es
+          hostPath:
+              path: /www/k8s/foxdev/elasticsearch/config/elasticsearch.yml
+              type: File
+        - name: vol-synonyms
+          hostPath:
+              path: /www/k8s/foxdev/elasticsearch/config/synonyms.txt
+              type: File

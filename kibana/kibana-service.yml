@@ -1,0 +1,17 @@
+
+
+apiVersion: v1
+kind: Service
+metadata:
+#  namespace: default
+  name: kibana
+  labels:
+    name: kibana
+spec:
+  type: NodePort
+  ports:
+    - port: 5601
+      targetPort: 5601
+      nodePort: 5601
+  selector:
+    name: kibana

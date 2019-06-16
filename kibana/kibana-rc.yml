@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kibana
+  labels:
+    name: kibana
+#  namespace: default
+spec:
+  replicas: 1
+  selector:
+    name: kibana
+  template:
+    metadata:
+      labels:
+        name: kibana
+    spec:
+      containers:
+        - name: kibana
+          image: foxiswho/elk:kibana-7.1.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 150m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 5601
+          volumeMounts:
+            - name: vol-conf
+              mountPath: /usr/share/kibana/config/kibana.yml
+      volumes:
+        - name: vol-conf
+          hostPath:
+            path: /www/k8s/foxdev/kibana/config/kibana.yml
+            type: File

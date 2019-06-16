@@ -12,6 +12,9 @@ mkdir -p ${DIR}/rocketmq/store/*
 mkdir -p ${DIR}/rocketmq/store-b/*
 mkdir -p ${DIR}/rocketmq/store-b-s/*
 
+chmod -R 777 ${DIR}/rocketmq/store*
+chmod -R 777 ${DIR}/rocketmq/logs*
+
 kubectl create -f  ${DIR}/rocketmq/ui-rc.yml
 kubectl create -f  ${DIR}/rocketmq/ui-service.yml
 

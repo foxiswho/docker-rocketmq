@@ -255,3 +255,40 @@ curl -X GET "http://192.168.0.254:8848/nacos/v1/cs/configs?dataId=test.fox&group
 ```bash
 helloWorld
 ```
+
+
+# k8s redis 独立部署
+采用 redis 最新 版本
+
+官方 docker redis
+
+https://hub.docker.com/_/redis
+
+## 相关参数说明
+
+端口 6379
+
+## 目录
+
+>/www/k8s/foxdev/redis/data               数据文件
+>/www/k8s/foxdev/redis/conf            配置文件目录
+
+
+## 独立部署 redis 操作
+直接执行 `根目录`下 `create.r.redis.start.sh` 即可
+
+```shell
+
+./create.r.redis.start.sh
+
+```
+
+
+执行完成后，即可用 redis 缓存了
+
+
+#
+
+## 词库
+
+https://github.com/medcl/elasticsearch-analysis-ik
