@@ -392,7 +392,7 @@ curl -XPOST http://192.168.0.254:9200/index/_create/4?pretty -H 'Content-Type:ap
 
 ```bash
 curl -XPOST http://192.168.0.254:9200/index/_create/5?pretty -H 'Content-Type:application/json' -d'
-{"content":"习近平结束对吉尔吉斯共和国、塔吉克斯坦共和国国事访问并出席上海合作组织成员国元首理事会第十九次会议、亚洲相互"}
+{"content":"考验特朗普的时候到了！美盟友率先出手，普京紧跟2记“重拳”"}
 '
 ```
 
