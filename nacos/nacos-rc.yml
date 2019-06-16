@@ -82,10 +82,18 @@ spec:
               value: "nacos-0.nacos.default.svc.cluster.local:8848 nacos-1.nacos.default.svc.cluster.local:8848 nacos-2.nacos.default.svc.cluster.local:8848"
           volumeMounts:
             - name: vol-logs
-              mountPath: /home/nacos/logs 
+              mountPath: /home/nacos/logs
+            - name: vol-file
+              mountPath: /home/nacos/init.d/custom.properties
+
+
       volumes:
         - name: vol-logs
           hostPath:
             path: /www/k8s/foxdev/nacos/logs-nacos
             type: Directory
+        - name: vol-file
+          hostPath:
+              path: /www/k8s/foxdev/nacos/init.d/custom.properties
+              type: File
 

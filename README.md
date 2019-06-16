@@ -146,6 +146,10 @@ kubectl get rc
 
 及创建 数据库`nacos`用户和密码`nacos`
 
+官方：
+
+https://nacos.io/zh-cn/docs/what-is-nacos.html
+
 ## 相关参数说明
 
 端口 3306
@@ -175,3 +179,79 @@ nacos/nacos
 
 
 执行完成后，即可用 数据库管理软件，进行操作数据库了
+
+
+
+# k8s nacos 独立部署
+编排文件 改动官方的编排的文件，去除了数据库主从备份，这里使用 mariadb 最新版数据库
+
+所以，要先 生成 mariadb 才能 部署 nacos
+
+## 相关参数说明 
+
+端口 ：8848
+
+账号/密码
+
+nacos/nacos
+
+如何修改nacos 账号及密码,请看官方的
+
+https://nacos.io/zh-cn/docs/console-guide.html
+
+## 目录
+
+/www/k8s/foxdev/nacos/logs-nacos                    日志目录
+
+/www/k8s/foxdev/nacos/init.d/custom.properties      额外配置文件
+
+## 独立部署 nacos 操作
+直接执行 `根目录`下 `create.n.nacos.start.sh` 即可
+
+```shell
+
+./create.n.nacos.start.sh
+
+```
+
+执行完成后,访问控制台网址即可操作`naocs`配置了
+```shell
+http://192.168.0.254:8848/nacos
+```
+## 测试
+
+### 服务注册
+```bash
+curl -X PUT 'http://192.168.0.254:8848/nacos/v1/ns/instance?serviceName=test.fox&ip=192.0.1.10&port=8080'
+```
+返回
+```bash
+ok
+```
+### 服务发现
+```bash
+curl -X GET 'http://192.168.0.254:8848/nacos/v1/ns/instances?serviceName=test.fox'
+```
+### 发布配置
+```bash
+curl -X POST "http://192.168.0.254:8848/nacos/v1/cs/configs?dataId=test.fox&group=test&content=helloWorld"
+```
+返回
+```bash
+true
+```
+在浏览器中查看`配置列表`，
+
+就会发现有一个新配置,DataId 为`test.fox`，
+
+Group为`test`的配置，
+
+点击`编辑`，可以看到内容为`helloWorld`
+### 获取配置
+```bash
+curl -X GET "http://192.168.0.254:8848/nacos/v1/cs/configs?dataId=test.fox&group=test"
+```
+返回
+```bash
+helloWorld
+```

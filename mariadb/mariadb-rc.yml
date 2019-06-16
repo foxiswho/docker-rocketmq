@@ -30,7 +30,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: mariadb
-          image: mariadb:latest
+          image: mariadb:10.4
           imagePullPolicy: IfNotPresent
           resources:
             limits:

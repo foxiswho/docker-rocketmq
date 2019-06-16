@@ -22,16 +22,16 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: 450m
-              memory: 1768Mi
+              cpu: 250m
+              memory: 768Mi
             requests:
               cpu: 100m
-              memory: 768Mi
+              memory: 512Mi
           env:
             - name: TZ
               value: Asia/Shanghai
             - name: JAVA_OPTS
-              value: -Drocketmq.namesrv.addr=rocketmq:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Duser.home=/root  -Xms768m -Xmx768m
+              value: -Drocketmq.namesrv.addr=rocketmq:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Duser.home=/root  -Xms512m -Xmx512m
           ports:
             - containerPort: 8080
           volumeMounts:
