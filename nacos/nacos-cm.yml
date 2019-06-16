@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nacos-cm
+data:
+  mysql.master.db.name: "nacos_devtest"
+  mysql.master.port: "3306"
+  mysql.slave.port: "3306"
+  mysql.master.user: "nacos"
+  mysql.master.password: "nacos"
+  mysql.master.host: "mariadb-0.mariadb.default.svc.cluster.local"
+  mysql.slave.host: "mariadb-0.mariadb.default.svc.cluster.local"

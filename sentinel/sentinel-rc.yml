@@ -28,8 +28,18 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
+            - name: SERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: sentinel-cm
+                  key: sentinel.server.host
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: sentinel-cm
+                  key: sentinel.server.port
           ports:
-            - containerPort: 8080
+            - containerPort: 8280
           volumeMounts:
             - name: vol-log
               mountPath: /opt/logs

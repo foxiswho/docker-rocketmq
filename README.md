@@ -287,8 +287,189 @@ https://hub.docker.com/_/redis
 执行完成后，即可用 redis 缓存了
 
 
-#
+# k8s elasticsearch 独立部署
+当前版本已经安装了词库
 
 ## 词库
+常用的词库
 
 https://github.com/medcl/elasticsearch-analysis-ik
+
+## 相关参数说明 
+端口：9200
+
+端口：9300
+
+
+## 目录说明
+
+elasticsearch/logs      日志目录
+
+elasticsearch/data      数据目录
+
+如果你有更多的插件需要加载，那么 请自行配置相关目录
+
+
+## 独立部署 elasticsearch 操作
+直接执行 `根目录`下 `create.elk.elasticsearch.start.sh` 即可
+
+```shell
+
+./create.elk.elasticsearch.start.sh
+
+```
+
+
+执行完成后，即可用 elasticsearch 了
+## 案例
+### 创建索引
+```bash
+curl -XPUT http://192.168.0.254:9200/index
+```
+### 创建mapping
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_mapping -H 'Content-Type:application/json' -d'
+{
+        "properties": {
+            "content": {
+                "type": "text",
+                "analyzer": "ik_max_word",
+                "search_analyzer": "ik_smart"
+            }
+        }
+
+}'
+```
+### 添加几条数据
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_create/1 -H 'Content-Type:application/json' -d'
+{"content":"美国留给伊拉克的是个烂摊子吗"}
+'
+```
+
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_create/2 -H 'Content-Type:application/json' -d'
+{"content":"公安部：各地校车将享最高路权"}
+'
+```
+
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_create/3 -H 'Content-Type:application/json' -d'
+{"content":"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"}
+'
+```
+
+
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_create/3 -H 'Content-Type:application/json' -d'
+{"content":"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"}
+'
+```
+
+curl -XPOST http://192.168.0.254:9200/index/_create/4 -H 'Content-Type:application/json' -d'
+{"content":"中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"}
+'
+
+### 查询
+```bash
+curl -XPOST http://192.168.0.254:9200/index/_search  -H 'Content-Type:application/json' -d'
+{
+    "query" : { "match" : { "content" : "中国" }},
+    "highlight" : {
+        "pre_tags" : ["<tag1>", "<tag2>"],
+        "post_tags" : ["</tag1>", "</tag2>"],
+        "fields" : {
+            "content" : {}
+        }
+    }
+}
+'
+```
+输出
+```bash
+{
+    "took": 14,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 2,
+        "hits": [
+            {
+                "_index": "index",
+                "_type": "fulltext",
+                "_id": "4",
+                "_score": 2,
+                "_source": {
+                    "content": "中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首"
+                },
+                "highlight": {
+                    "content": [
+                        "<tag1>中国</tag1>驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首 "
+                    ]
+                }
+            },
+            {
+                "_index": "index",
+                "_type": "fulltext",
+                "_id": "3",
+                "_score": 2,
+                "_source": {
+                    "content": "中韩渔警冲突调查：韩警平均每天扣1艘中国渔船"
+                },
+                "highlight": {
+                    "content": [
+                        "均每天扣1艘<tag1>中国</tag1>渔船 "
+                    ]
+                }
+            }
+        ]
+    }
+}
+```
+
+# k8s kibana 独立部署
+必须先 部署好  elasticsearch
+## 相关说明
+
+端口  5601
+
+## 独立部署 kibana 操作
+直接执行 `根目录`下 `create.elk.kibana.start.sh` 即可
+
+```shell
+
+./create.elk.kibana.start.sh
+
+```
+## 访问 
+部署成功后就可以直接用浏览器访问了
+```bash
+http://192.168.0.254:5601
+```
+
+# k8s sentinel 独立部署
+
+## 相关说明
+端口：8280
+
+sentinel/logs   日志目录
+
+## 独立部署 sentinel 操作
+直接执行 `根目录`下 `create.s.sentinel.start.sh` 即可
+
+```shell
+
+./create.s.sentinel.start.sh
+
+```
+## 访问
+
+直接用浏览器访问
+```bash
+http://192.168.0.254:8280
+```

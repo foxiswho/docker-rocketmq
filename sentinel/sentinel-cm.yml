@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sentinel-cm
+data:
+  sentinel.server.host: "nacos.default.svc.cluster.local"
+  sentinel.server.port: "8848"

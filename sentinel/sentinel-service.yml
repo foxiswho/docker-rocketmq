@@ -10,8 +10,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8080
-      targetPort: 8700
-      nodePort: 8700
+    - port: 8280
+      targetPort: 8280
+      nodePort: 8280
   selector:
     name: sentinel
+

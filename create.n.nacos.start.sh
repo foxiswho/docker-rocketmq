@@ -8,6 +8,7 @@ chmod -R 777 ${DIR}/nacos/logs-nacos
 
 
 
+kubectl create -f  ${DIR}/nacos/nacos-cm.yml
 kubectl create -f  ${DIR}/nacos/nacos-service.yml
 kubectl create -f  ${DIR}/nacos/nacos-rc.yml
 
