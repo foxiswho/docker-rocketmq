@@ -34,11 +34,12 @@ char=`get_char`;
 
 
 
-echo "删除条件：\033[31m all \033[0m"
+echo -e "删除条件：\033[31m all \033[0m"
 echo ""
 echo "all：表示全部删除，确认执行删除"
 
-stty erase ^h
+#stty erase ^h
+stty erase ^?
 read -p "请输入删除条件: " INPUT
 if [ x$INPUT == x"all" ]; then
     echo "开始执行删除"
