@@ -32,12 +32,13 @@ get_char()
 echo "任意键继续，如果不需要继续执行删除操作，那么请 关闭终端"
 char=`get_char`;
 
-stty erase '^H'
 
-echo "删除条件：\033[31mall\033[0m"
+
+echo "删除条件：\033[31m all \033[0m"
 echo ""
 echo "all：表示全部删除，确认执行删除"
 
+stty erase ^h
 read -p "请输入删除条件: " INPUT
 if [ x$INPUT == x"all" ]; then
     echo "开始执行删除"
