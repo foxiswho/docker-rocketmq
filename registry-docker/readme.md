@@ -41,7 +41,7 @@ Get https://192.168.0.254:5000/v2/: http: server gave HTTP response to HTTPS cli
 配置 本地 docker （Linux） 在配置文件中`/etc/docker/daemon.json`增加
 ```json
 { 
-    "insecure-registries":["192.168.1.100:5000"] 
+    "insecure-registries":["192.168.0.254:5000"] 
 }
 ```
 

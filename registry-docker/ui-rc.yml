@@ -33,5 +33,9 @@ spec:
               value: http://registry-0.registry.default.svc.cluster.local:5000/v2
             - name: REGISTRY_NAME
               value: http://192.168.0.254:5000
+            - name: REGISTRY_READONLY
+              value: false
+            - name: REGISTRY_STORAGE_DELETE_ENABLED
+              value: true
           ports:
             - containerPort: 8080
