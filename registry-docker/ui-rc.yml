@@ -29,9 +29,9 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
-            - name: REGISTRY_URL:
+            - name: REGISTRY_URL
               value: http://registry-0.registry.default.svc.cluster.local:5000/v2
-            - name: REGISTRY_NAME:
+            - name: REGISTRY_NAME
               value: http://192.168.0.254:5000
           ports:
             - containerPort: 8080
