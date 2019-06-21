@@ -28,7 +28,7 @@ http://192.168.0.254:5000/v2/_catalog
 
 # 查看镜像标签
 
-http://192.168.0.254:5000/v2/_catalog//tags/list
+http://192.168.0.254:5000/v2/xxxx/tags/list
 
 # 简单管理界面
 

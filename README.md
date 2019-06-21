@@ -572,3 +572,58 @@ prometheus/conf/prometheus-cluster.yaml 配置文件
 ```bash
 http://192.168.0.254:9090
 ```
+
+#   k8s ingress nginx 独立部署
+官方
+
+https://github.com/kubernetes/ingress-nginx/blob/nginx-0.24.1/deploy/mandatory.yaml
+
+
+版本： 0.24.1
+## 相关说明
+端口：80
+端口：443
+
+## 独立部署 ingress nginx 
+## 独立部署 prometheus 操作
+直接执行 `根目录`下 `create.i.ingress.start.sh` 即可
+
+```shell
+
+./create.i.ingress.start.sh
+
+```
+
+## 查看 ingress pods
+```bash
+kubectl get pods --namespace=ingress-nginx  --watch
+
+或
+
+kubectl get pods --namespace=ingress-nginx
+
+```
+
+## 查看 ingress
+```bash
+
+kubectl get ingress
+```
+## 测试案例
+默认已经安装 nginx 测试案例
+
+在 `192.168.0.254` 服务器中 设置 hosts
+```bash
+echo "192.168.0.254 test.nginx.ingress " >> /etc/hosts
+```
+### 查看
+
+在 `192.168.0.254` 测试使用
+```bash
+curl http://test.nginx.ingress
+```
+
+在本机使用
+```bash
+curl -v http://192.168.0.254 -H 'host: test.nginx.ingress'
+```
