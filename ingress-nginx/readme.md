@@ -55,3 +55,68 @@ curl http://test.nginx.ingress
 ```bash
 curl -v http://192.168.0.254 -H 'host: test.nginx.ingress'
 ```
+
+
+# https 证书配置 
+当前 目录下有 xxxx 域名证书   www.foxwho.com.crt www.foxwho.com.key
+
+```bash
+kubectl create secret tls nginx-ingress-secret \
+--cert=www.foxwho.com.crt --key=www.foxwho.com.key 
+
+```
+## 重新编辑 test-ingress.yml文件
+
+```xml
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+#  namespace: default
+  name: test-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+        - www.foxwho.com
+        secretName: nginx-ingress-secret
+  rules:
+  - host: test.nginx.ingress
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: test-nginx
+            servicePort: 80
+  - host: www.foxwho.com
+    http:
+        paths:
+          - path: /
+            backend:
+              serviceName: test-nginx
+              servicePort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-ingress
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 80
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 443
+      nodePort: 443
+      protocol: TCP
+  selector:
+    app: test-nginx
+```
