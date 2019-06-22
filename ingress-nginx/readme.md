@@ -60,11 +60,16 @@ curl -v http://192.168.0.254 -H 'host: test.nginx.ingress'
 # https 证书配置 
 当前 目录下有 xxxx 域名证书   www.foxwho.com.crt www.foxwho.com.key
 
+## 创建 secret
+
+
 ```bash
-kubectl create secret tls nginx-ingress-secret \
+kubectl create secret tls foxwho-secret \
 --cert=www.foxwho.com.crt --key=www.foxwho.com.key 
 
 ```
+
+
 ## 重新编辑 test-ingress.yml文件
 
 ```xml
@@ -81,7 +86,7 @@ spec:
   tls:
   - hosts:
         - www.foxwho.com
-        secretName: nginx-ingress-secret
+        secretName: foxwho-secret
   rules:
   - host: test.nginx.ingress
     http:
