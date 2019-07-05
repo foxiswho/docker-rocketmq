@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DIR=$(pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 echo "k8s   一键快速 部署"
 echo " "

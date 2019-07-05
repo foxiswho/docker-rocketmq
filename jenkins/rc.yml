@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: jenkins
+  labels:
+    name: jenkins
+#  namespace: default
+spec:
+  replicas: 1
+  selector:
+    name: jenkins
+  template:
+    metadata:
+      labels:
+        name: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 150m
+              memory: 1024Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          volumeMounts:
+            - name: vol-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: vol-home
+          hostPath:
+            path: /www/k8s/foxdev/jenkins/home
+            type: Directory

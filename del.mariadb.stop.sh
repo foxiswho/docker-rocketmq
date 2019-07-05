@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=$(pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 echo "kubectl delete "
 

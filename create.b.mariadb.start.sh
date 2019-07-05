@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=$(pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 
 rm -rf /etc/yum.repos.d/mariadb.repo

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=$(pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 mkdir -p        ${DIR}/elasticsearch/logs
 mkdir -p        ${DIR}/elasticsearch/data

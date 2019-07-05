@@ -1,0 +1,22 @@
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  #  namespace: default
+  name: jenkins
+  labels:
+    name: jenkins
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 58080
+      name: web
+    - port: 50000
+      targetPort: 50000
+      nodePort: 50000
+      name: web2
+  selector:
+    name: jenkins

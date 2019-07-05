@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=$(pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 
 kubectl create -f  ${DIR}/kibana/kibana-service.yml

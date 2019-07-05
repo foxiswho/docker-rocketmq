@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=$(pwd)
+DIR=$(cd $(dirname $0); pwd)
 
 mkdir -p        ${DIR}/sentinel/logs
 chmod -R 777    ${DIR}/sentinel/logs
