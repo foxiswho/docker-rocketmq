@@ -22,10 +22,10 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              cpu: 350m
+              cpu: 450m
               memory: 3Gi
             requests:
-              cpu: 100m
+              cpu: 350m
               memory: 2Gi
           env:
             - name: TZ

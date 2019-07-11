@@ -20,11 +20,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              cpu: 150m
-              memory: 512Mi
+              cpu: 400m
+              memory: 768Mi
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 300m
+              memory: 512Mi
           env:
             - name: TZ
               value: Asia/Shanghai
