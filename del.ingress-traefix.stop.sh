@@ -11,7 +11,7 @@ kubectl delete -f  ${DIR}/ingress-traefik/traefik-rbac.yml
 kubectl delete -f  ${DIR}/ingress-traefik/traefik-sa.yml
 kubectl delete -f  ${DIR}/ingress-traefik/traefik-ds-service.yml
 kubectl delete -f  ${DIR}/ingress-traefik/traefik-ds-master.yml
-kubectl delete -f  ${DIR}/ingress-traefik/nginx.yml
+kubectl delete -f  ${DIR}/ingress-traefik/test-nginx.yml
 kubectl delete -f  ${DIR}/ingress-traefik/ingress.yml
 kubectl delete -f  ${DIR}/ingress-traefik/ingress-service.yml
 
