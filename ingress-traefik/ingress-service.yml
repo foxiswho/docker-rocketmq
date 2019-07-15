@@ -19,8 +19,3 @@ spec:
       targetPort: 443
       nodePort: 443
       protocol: TCP
-    - name: web2
-      port: 8080
-      targetPort: 8080
-      nodePort: 8080
-      protocol: TCP

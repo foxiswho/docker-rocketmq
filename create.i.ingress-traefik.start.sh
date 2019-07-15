@@ -10,6 +10,7 @@ kubectl create -f  ${DIR}/ingress-traefik/traefik-rbac.yml
 kubectl create -f  ${DIR}/ingress-traefik/traefik-sa.yml
 kubectl create -f  ${DIR}/ingress-traefik/traefik-ds-service.yml
 kubectl create -f  ${DIR}/ingress-traefik/traefik-ds-master.yml
+kubectl create -f  ${DIR}/ingress-traefik/nginx.yml
 kubectl create -f  ${DIR}/ingress-traefik/ingress.yml
 kubectl create -f  ${DIR}/ingress-traefik/ingress-service.yml
 
