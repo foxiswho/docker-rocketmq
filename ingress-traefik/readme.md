@@ -16,7 +16,7 @@ c
 # 创建   traefik rbac
 
 
-kubectl apply -f traefik-rbac.yaml
+kubectl apply -f traefik-rbac.yml
 
 kubectl get clusterrole
 
@@ -24,14 +24,22 @@ kubectl get clusterrole
 
 # 部署 traefik
 
-kubectl apply -f traefik-ds.yaml
+kubectl apply -f traefik-sa.yml
+
+kubectl apply -f traefik-ds-service.yml
+
+kubectl apply -f traefik-ds.yml
+
+kubectl apply -f ingress.yml
+kubectl apply -f ingress-service.yml
+
 
 kubectl get svc -n kube-system
 
 kubectl get pods -n kube-system -o wide
 
 
-如果你想只部署在 master 节点，其他节点不部署，请把 traefik-ds.yaml 替换为 traefik-ds-master.yaml
+如果你想只部署在 master 节点，其他节点不部署，请把 traefik-ds.yml 替换为 traefik-ds-master.yml
 
 
 

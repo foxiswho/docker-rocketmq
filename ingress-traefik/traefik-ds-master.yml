@@ -1,26 +1,29 @@
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: traefik-ingress-controller
-  namespace: kube-system
----
-kind: DaemonSet
+
 apiVersion: extensions/v1beta1
+kind: DaemonSet
 metadata:
   name: traefik-ingress-controller
   namespace: kube-system
   labels:
     k8s-app: traefik-ingress-lb
+    app: web
 spec:
   template:
     metadata:
       labels:
         k8s-app: traefik-ingress-lb
+        app: web
         name: traefik-ingress-lb
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: "Equal"
+        value: ""
+        effect: NoSchedule
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
       containers:
       - image: traefik
         name: traefik-ingress-lb
@@ -41,19 +44,3 @@ spec:
         - --api
         - --kubernetes
         - --logLevel=INFO
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-ingress-service
-  namespace: kube-system
-spec:
-  selector:
-    k8s-app: traefik-ingress-lb
-  ports:
-    - protocol: TCP
-      port: 80
-      name: web
-    - protocol: TCP
-      port: 8080
-      name: admin
