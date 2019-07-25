@@ -1,18 +1,20 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: jenkins
   labels:
-    name: jenkins
+    app: jenkins
 #  namespace: default
 spec:
+  serviceName: jenkins
   replicas: 1
   selector:
-    name: jenkins
+    matchLabels:
+      app: jenkins
   template:
     metadata:
       labels:
-        name: jenkins
+        app: jenkins
     spec:
       containers:
         - name: jenkins

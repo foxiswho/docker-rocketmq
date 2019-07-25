@@ -6,7 +6,7 @@ metadata:
 #  namespace: default
   name: prometheus
   labels:
-    name: prometheus
+    app: prometheus
 spec:
   type: NodePort
   ports:
@@ -14,4 +14,4 @@ spec:
       targetPort: 9090
       nodePort: 9090
   selector:
-    name: prometheus
+    app: prometheus

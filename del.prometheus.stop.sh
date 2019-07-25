@@ -4,8 +4,8 @@ DIR=$(cd $(dirname $0); pwd)
 
 echo "kubectl delete "
 
-kubectl delete -f  ${DIR}/prometheus/prometheus-service.yml
-kubectl delete -f  ${DIR}/prometheus/prometheus-rc.yml
+kubectl delete -f  ${DIR}/prometheus/service.yml
+kubectl delete -f  ${DIR}/prometheus/pod.yml
 
 
 kubectl get pod

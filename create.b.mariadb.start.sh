@@ -29,8 +29,8 @@ chmod -R 777 ${DIR}/mariadb/mariadb.conf.d
 
 
 
-kubectl create -f  ${DIR}/mariadb/mariadb-service.yml
-kubectl create -f  ${DIR}/mariadb/mariadb-rc.yml
+kubectl create -f  ${DIR}/mariadb/service.yml
+kubectl create -f  ${DIR}/mariadb/pod.yml
 
 echo "等待 mariadb pod 容器启动成功"
 echo "60 秒等待时间"

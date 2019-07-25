@@ -6,8 +6,8 @@ echo "kubectl delete "
 
 #rm -rf ${DIR}/mariadb/data
 
-kubectl delete -f  ${DIR}/mariadb/mariadb-service.yml
-kubectl delete -f  ${DIR}/mariadb/mariadb-rc.yml
+kubectl delete -f  ${DIR}/mariadb/service.yml
+kubectl delete -f  ${DIR}/mariadb/pod.yml
 
 
 kubectl get pod

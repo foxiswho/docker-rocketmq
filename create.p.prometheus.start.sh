@@ -3,8 +3,8 @@
 DIR=$(cd $(dirname $0); pwd)
 
 
-kubectl create -f  ${DIR}/prometheus/prometheus-service.yml
-kubectl create -f  ${DIR}/prometheus/prometheus-rc.yml
+kubectl create -f  ${DIR}/prometheus/service.yml
+kubectl create -f  ${DIR}/prometheus/pod.yml
 
 kubectl get pod
 

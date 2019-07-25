@@ -3,8 +3,8 @@
 DIR=$(cd $(dirname $0); pwd)
 
 
-kubectl create -f  ${DIR}/grafana/grafana-service.yml
-kubectl create -f  ${DIR}/grafana/grafana-rc.yml
+kubectl create -f  ${DIR}/grafana/service.yml
+kubectl create -f  ${DIR}/grafana/pod.yml
 
 kubectl get pod
 

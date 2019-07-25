@@ -6,7 +6,7 @@ metadata:
 #  namespace: default
   name: grafana
   labels:
-    name: grafana
+    app: grafana
 spec:
   type: NodePort
   ports:
@@ -14,4 +14,4 @@ spec:
       targetPort: 3000
       nodePort: 3000
   selector:
-    name: grafana
+    app: grafana

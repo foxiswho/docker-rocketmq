@@ -6,7 +6,7 @@ echo "kubectl delete "
 
 
 kubectl delete -f  ${DIR}/jenkins/service.yml
-kubectl delete -f  ${DIR}/jenkins/rc.yml
+kubectl delete -f  ${DIR}/jenkins/pod.yml
 
 kubectl get pod
 

@@ -6,7 +6,7 @@ metadata:
   #  namespace: default
   name: jenkins
   labels:
-    name: jenkins
+    app: jenkins
 spec:
   type: NodePort
   ports:
@@ -19,4 +19,4 @@ spec:
       nodePort: 50000
       name: web2
   selector:
-    name: jenkins
+    app: jenkins
