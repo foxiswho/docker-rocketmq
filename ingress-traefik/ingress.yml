@@ -1,0 +1,23 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-traefik
+  namespace: kube-system
+spec:
+  rules:
+    - host: nginx.foxwho.com
+      http:
+        paths:
+            - path: /
+              backend:
+                serviceName: test-nginx
+                servicePort: 80
+    - host: ui.traefik.foxwho.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: traefik-ingress-lb
+              servicePort: 8080
+
