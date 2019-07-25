@@ -1,18 +1,20 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: kibana
   labels:
-    name: kibana
+    app: kibana
 #  namespace: default
 spec:
+  serviceName: kibana
   replicas: 1
   selector:
-    name: kibana
+    matchLabels:
+      app: kibana
   template:
     metadata:
       labels:
-        name: kibana
+        app: kibana
     spec:
       containers:
         - name: kibana

@@ -6,7 +6,7 @@ metadata:
 #  namespace: default
   name: kibana
   labels:
-    name: kibana
+    app: kibana
 spec:
   type: NodePort
   ports:
@@ -14,4 +14,4 @@ spec:
       targetPort: 5601
       nodePort: 5601
   selector:
-    name: kibana
+    app: kibana

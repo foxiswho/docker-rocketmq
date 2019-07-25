@@ -8,9 +8,9 @@ chmod -R 777 ${DIR}/nacos/logs-nacos
 
 
 
-kubectl create -f  ${DIR}/nacos/nacos-cm.yml
-kubectl create -f  ${DIR}/nacos/nacos-service.yml
-kubectl create -f  ${DIR}/nacos/nacos-rc.yml
+kubectl create -f  ${DIR}/nacos/cm.yml
+kubectl create -f  ${DIR}/nacos/service.yml
+kubectl create -f  ${DIR}/nacos/pod.yml
 
 kubectl get pod
 

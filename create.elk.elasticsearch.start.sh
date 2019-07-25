@@ -9,8 +9,8 @@ chmod -R 777    ${DIR}/elasticsearch/logs
 chmod -R 777    ${DIR}/elasticsearch/data
 chmod -R 777    ${DIR}/elasticsearch/plugins/analysis-ik
 
-kubectl create -f  ${DIR}/elasticsearch/elasticsearch-service.yml
-kubectl create -f  ${DIR}/elasticsearch/elasticsearch-rc.yml
+kubectl create -f  ${DIR}/elasticsearch/service.yml
+kubectl create -f  ${DIR}/elasticsearch/pod.yml
 
 kubectl get pod
 

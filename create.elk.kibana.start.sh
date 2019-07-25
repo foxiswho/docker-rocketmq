@@ -3,8 +3,8 @@
 DIR=$(cd $(dirname $0); pwd)
 
 
-kubectl create -f  ${DIR}/kibana/kibana-service.yml
-kubectl create -f  ${DIR}/kibana/kibana-rc.yml
+kubectl create -f  ${DIR}/kibana/service.yml
+kubectl create -f  ${DIR}/kibana/pod.yml
 
 kubectl get pod
 

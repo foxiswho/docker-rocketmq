@@ -3,8 +3,8 @@
 DIR=$(cd $(dirname $0); pwd)
 
 
-kubectl create -f  ${DIR}/zipkin/zipkin-service.yml
-kubectl create -f  ${DIR}/zipkin/zipkin-rc.yml
+kubectl create -f  ${DIR}/zipkin/service.yml
+kubectl create -f  ${DIR}/zipkin/pod.yml
 
 kubectl get pod
 

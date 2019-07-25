@@ -4,9 +4,9 @@ DIR=$(cd $(dirname $0); pwd)
 
 echo "kubectl delete "
 
-kubectl delete -f  ${DIR}/nacos/nacos-service.yml
-kubectl delete -f  ${DIR}/nacos/nacos-rc.yml
-kubectl delete -f  ${DIR}/nacos/nacos-cm.yml
+kubectl delete -f  ${DIR}/nacos/service.yml
+kubectl delete -f  ${DIR}/nacos/pod.yml
+kubectl delete -f  ${DIR}/nacos/cm.yml
 
 
 kubectl get pod

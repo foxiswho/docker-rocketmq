@@ -4,15 +4,14 @@ apiVersion: v1
 kind: Service
 metadata:
 #  namespace: default
-  name: sentinel
+  name: zipkin
   labels:
-    name: sentinel
+    app: zipkin
 spec:
   type: NodePort
   ports:
-    - port: 8280
-      targetPort: 8280
-      nodePort: 8280
+    - port: 9411
+      targetPort: 9411
+      nodePort: 9411
   selector:
-    name: sentinel
-
+    app: zipkin

@@ -7,8 +7,8 @@ echo "kubectl delete "
 rm -rf  ${DIR}/elasticsearch/logs/*
 rm -rf  ${DIR}/elasticsearch/data/*
 
-kubectl delete -f  ${DIR}/elasticsearch/elasticsearch-service.yml
-kubectl delete -f  ${DIR}/elasticsearch/elasticsearch-rc.yml
+kubectl delete -f  ${DIR}/elasticsearch/service.yml
+kubectl delete -f  ${DIR}/elasticsearch/pod.yml
 
 kubectl get pod
 
