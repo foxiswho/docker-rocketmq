@@ -6,6 +6,7 @@ metadata:
   labels:
     app: zipkin
 spec:
+  serviceName: zipkin
   replicas: 1
   selector:
     matchLabels:
