@@ -71,6 +71,15 @@ mysql -h127.0.0.1 -uroot -proot mysql < ${DIR}/mariadb/sql/nacos-mysql.sql
 
 echo -e "\nnacos-mysql.sql 数据导入成功 \n\n\n"
 
+echo -e "开始 导入 xxl-job sql.sql 数据"
+echo -e "使用系统 用户 root,密码为 root"
+echo -e "创建 库 xxl_job "
+
+# 导入数据库SQL
+mysql -h127.0.0.1 -uroot -proot mysql < ${DIR}/job-xxl-job/sql/sql.sql
+
+echo -e "\nnacos-mysql.sql 数据导入成功 \n\n\n"
+
 kubectl get pod
 
 echo -e "\n\n\n"

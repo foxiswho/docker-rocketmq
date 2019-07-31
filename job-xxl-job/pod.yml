@@ -1,43 +1,47 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: jenkins
+  name: xxl-job
   labels:
-    app: jenkins
+    app: xxl-job
 #  namespace: default
 spec:
-  serviceName: jenkins
+  serviceName: xxl-job
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins
+      app: xxl-job
   template:
     metadata:
       labels:
-        app: jenkins
+        app: xxl-job
     spec:
       containers:
-        - name: jenkins
-          image: jenkins/jenkins:lts
+        - name: xxl-job
+          image: xuxueli/xxl-job-admin:2.1.0
           imagePullPolicy: IfNotPresent
           resources:
             limits:
               cpu: 450m
-              memory: 2048Mi
+              memory: 1024Mi
             requests:
               cpu: 400m
-              memory: 2048Mi
+              memory: 1024Mi
           env:
             - name: TZ
               value: Asia/Shanghai
+            - name: PARAMS
+              valueFrom:
+                configMapKeyRef:
+                  name: xxl-job-cm
+                  key: PARAMS
           ports:
             - containerPort: 8080
-            - containerPort: 50000
           volumeMounts:
-            - name: vol-home
-              mountPath: /var/jenkins_home
+            - name: vol-logs
+              mountPath: /data/applogs
       volumes:
-        - name: vol-home
+        - name: vol-logs
           hostPath:
-            path: /www/k8s/foxdev/jenkins/home
+            path: /www/k8s/foxdev/job-xxl-job/logs
             type: Directory

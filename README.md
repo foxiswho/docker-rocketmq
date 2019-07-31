@@ -585,7 +585,6 @@ https://github.com/kubernetes/ingress-nginx/blob/nginx-0.24.1/deploy/mandatory.y
 端口：443
 
 ## 独立部署 ingress nginx 
-## 独立部署 prometheus 操作
 直接执行 `根目录`下 `create.i.ingress.start.sh` 即可
 
 ```shell
@@ -626,4 +625,40 @@ curl http://test.nginx.ingress
 在本机使用
 ```bash
 curl -v http://192.168.0.254 -H 'host: test.nginx.ingress'
+```
+
+
+# 任务调度 xxl-job k8s 独立部署
+
+http://www.xuxueli.com/xxl-job/
+
+http://www.xuxueli.com/xxl-job/#/?id=%e3%80%8a%e5%88%86%e5%b8%83%e5%bc%8f%e4%bb%bb%e5%8a%a1%e8%b0%83%e5%ba%a6%e5%b9%b3%e5%8f%b0xxl-job%e3%80%8b
+
+## 相关说明
+端口 ：6210
+
+容器内端口 ：8080
+
+用户名密码：admin/123456
+
+
+## 独立部署 xxl-job 操作
+直接执行 `根目录`下 `create.job.xxl-job.start.sh` 即可
+
+```shell
+
+./create.job.xxl-job.start.sh
+
+```
+## 访问
+
+直接用浏览器访问
+```bash
+http://192.168.0.254:6210/xxl-job-admin
+```
+
+## 查看 pods
+```bash
+kubectl get pods 
+
 ```

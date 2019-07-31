@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xxl-job-cm
+data:
+  PARAMS: "--spring.datasource.url=jdbc:mysql://mariadb-0.mariadb.default.svc.cluster.local:3306/xxl_job?Unicode=true&characterEncoding=UTF-8 --spring.datasource.username=root --spring.datasource.password=root "
