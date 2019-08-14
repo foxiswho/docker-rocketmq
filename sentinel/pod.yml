@@ -30,6 +30,8 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
+            - name: JAVA_OPT_EXT
+              value: -Dserver.servlet.session.timeout=7200
             - name: SERVER_HOST
               valueFrom:
                 configMapKeyRef:
@@ -40,6 +42,16 @@ spec:
                 configMapKeyRef:
                   name: sentinel-cm
                   key: sentinel.server.port
+            - name: USERNAME
+              valueFrom:
+                  configMapKeyRef:
+                    name: sentinel-cm
+                    key: sentinel.auth.username
+            - name: PASSWORD
+              valueFrom:
+                  configMapKeyRef:
+                    name: sentinel-cm
+                    key: sentinel.auth.password
           ports:
             - containerPort: 8280
           volumeMounts:

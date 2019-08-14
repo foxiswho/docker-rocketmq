@@ -492,7 +492,10 @@ http://192.168.0.254:5601
 # k8s sentinel 独立部署
 
 ## 相关说明
-端口：8280
+端口：8280   web
+端口：8719   api server
+
+用户名和密码： sentinel/sentinel
 
 sentinel/logs   日志目录
 
