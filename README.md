@@ -496,6 +496,7 @@ http://192.168.0.254:5601
 端口：8719   api server
 
 用户名和密码： sentinel/sentinel
+>如果要自定义用户名和密码，请修改sentinel/cm.yml 中的相关参数
 
 sentinel/logs   日志目录
 
