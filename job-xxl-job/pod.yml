@@ -19,7 +19,7 @@ spec:
       containers:
         - name: xxl-job
           image: xuxueli/xxl-job-admin:2.1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 450m

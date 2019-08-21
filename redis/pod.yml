@@ -19,7 +19,7 @@ spec:
       containers:
         - name: redis
           image: redis:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 350m

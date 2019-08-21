@@ -19,7 +19,7 @@ spec:
       containers:
         - name: kibana
           image: foxiswho/elk:kibana-7.2.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 150m

@@ -31,7 +31,7 @@ spec:
       containers:
         - name: mariadb
           image: mariadb:10.4
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 300m

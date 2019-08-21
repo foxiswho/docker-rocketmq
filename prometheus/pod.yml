@@ -19,7 +19,7 @@ spec:
       containers:
         - name: prometheus
           image: prom/prometheus:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 150m

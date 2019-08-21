@@ -19,7 +19,7 @@ spec:
       containers:
         - name: zipkin
           image: openzipkin/zipkin
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 150m

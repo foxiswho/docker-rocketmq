@@ -19,7 +19,7 @@ spec:
       containers:
         - name: sentinel
           image: foxiswho/sentinel
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 400m
