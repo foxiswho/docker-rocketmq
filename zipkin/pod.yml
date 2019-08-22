@@ -22,13 +22,18 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: 150m
-              memory: 256Mi
+              cpu: 450m
+              memory: 1024Mi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 400m
+              memory: 768Mi
           env:
             - name: TZ
               value: Asia/Shanghai
+            # 以下使用 elasticsearch 作为 数据存储,默认自动创建 索引 zipkin
+            - name: STORAGE_TYPE
+              value: elasticsearch
+            - name: ES_HOSTS
+              value: http://elasticsearch:9200
           ports:
             - containerPort: 9411

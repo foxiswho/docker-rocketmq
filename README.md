@@ -517,6 +517,13 @@ http://192.168.0.254:8280
 
 # k8s zipkin 独立部署
 
+https://github.com/openzipkin/zipkin
+
+https://github.com/openzipkin/zipkin/tree/master/zipkin-server
+
+
+使用 elasticsearch 作为数据存储
+
 ## 相关说明
 端口：9411
 
