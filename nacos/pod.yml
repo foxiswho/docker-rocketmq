@@ -31,8 +31,8 @@ spec:
           image: nacos/nacos-server:latest
           resources:
             requests:
-              memory: "768Mi"
-              cpu: "300m"
+              memory: 1024Mi
+              cpu: 400m
           ports:
             - containerPort: 8848
               name: client

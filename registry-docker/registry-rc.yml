@@ -21,10 +21,10 @@ spec:
           image: registry:latest
           resources:
             limits:
-              cpu: 150m
+              cpu: 450m
               memory: 4000Mi
             requests:
-              cpu: 100m
+              cpu: 400m
               memory: 2000Mi
           env:
             - name: TZ

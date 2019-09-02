@@ -22,11 +22,11 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: 150m
-              memory: 256Mi
+              cpu: 350m
+              memory: 512Mi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 300m
+              memory: 256Mi
           env:
             - name: TZ
               value: Asia/Shanghai

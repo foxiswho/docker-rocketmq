@@ -21,11 +21,11 @@ spec:
           image: hyper/docker-registry-web
           resources:
             limits:
-              cpu: 150m
-              memory: 4000Mi
+              cpu: 350m
+              memory: 1024Mi
             requests:
-              cpu: 100m
-              memory: 2000Mi
+              cpu: 300m
+              memory: 512Mi
           env:
             - name: TZ
               value: Asia/Shanghai
