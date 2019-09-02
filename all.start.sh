@@ -100,3 +100,8 @@ echo "部署完成"
 echo "部署完成"
 echo "部署完成"
 echo "部署完成"
+
+
+echo "已安装 pod 如下，如果某些 pod 没有安装，请执行 单独安装命令"
+
+kubectl get pods
