@@ -87,3 +87,7 @@ localhost:8180
 https://github.com/foxiswho/docker-nacos-sentinel-rocketmq-rabbitmq
 
 https://github.com/foxiswho/docker-consul-fabio-apollo-rocketmq-rabbitmq
+
+K8S 案例
+
+https://github.com/foxiswho/k8s-nacos-sentinel-rocketmq-zipkin-elasticsearch-redis-mysql
