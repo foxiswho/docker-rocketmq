@@ -24,5 +24,4 @@ EXPOSE 9876
 # && chmod +x ${ROCKETMQ_HOME}/bin/mqnamesrv
 
 CMD cd ${ROCKETMQ_HOME}/bin \
- && export JAVA_OPT=" -Duser.home=/opt" \
  && ${ROCKETMQ_HOME}/bin/mqnamesrv

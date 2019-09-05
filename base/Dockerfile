@@ -15,68 +15,78 @@
 # limitations under the License.
 #
 
-# This is maintained as the base image for namesrv and broker.
-#FROM java:8
 FROM centos:7
 
-# Rocketmq version
-ENV ROCKETMQ_VERSION "4.5.2"
-
-# Rocketmq home
-ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
-
-ENV NAMESRV_ADDR "namesrv:9876"
-
-ENV JAVA_OPT " -Duser.home=/opt "
-
-#tme zone
-RUN rm -rf /etc/localtime \
-&& ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-RUN yum install -y java-1.8.0-openjdk-headless unzip vim gettext nmap-ncat openssl\
+RUN yum install -y java-1.8.0-openjdk-devel.x86_64 unzip gettext nmap-ncat openssl, which gnupg, telnet \
  && yum clean all -y
 
-RUN mkdir -p \
- /opt/logs \
- /opt/store
+# FROM openjdk:8-jdk
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#		bash libapr1 unzip telnet wget gnupg ca-certificates \
+#	&& rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p ${ROCKETMQ_HOME}
+ARG user=rocketmq
+ARG group=rocketmq
+ARG uid=3000
+ARG gid=3000
 
+# RocketMQ is run with user `rocketmq`, uid = 3000
+# If you bind mount a volume from the host or a data container,
+# ensure you use the same uid
+RUN groupadd -g ${gid} ${group} \
+    && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+
+ENV JAVA_OPT       " -Duser.home=/opt "
+ENV NAMESRV_ADDR   "namesrv:9876"
+
+# Rocketmq version
+ENV ROCKETMQ_VERSION 4.5.2
+
+# Rocketmq home
+ENV ROCKETMQ_HOME  /home/rocketmq/rocketmq-${ROCKETMQ_VERSION}
 
 WORKDIR  ${ROCKETMQ_HOME}
 
-# get the version
-RUN cd /  \
- && curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
- && unzip rocketmq.zip \
- && rm -rf rocketmq-all*.zip \
- && rm -rf rocketmq.zip \
- && mv rocketmq-all-${ROCKETMQ_VERSION}-bin-release/*  ${ROCKETMQ_HOME}/ \
- && rm -rf rocketmq-all*
+RUN set -eux; \
+    curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip; \
+    curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip.asc -o rocketmq.zip.asc; \
+    #https://www.apache.org/dist/rocketmq/KEYS
+	curl https://www.apache.org/dist/rocketmq/KEYS -o KEYS; \
+	\
+	gpg --import KEYS; \
+    gpg --batch --verify rocketmq.zip.asc rocketmq.zip ; \
+    unzip rocketmq.zip ; \
+	mv rocketmq-all*/* . ; \
+	rmdir rocketmq-all*  ; \
+	rm rocketmq.zip rocketmq.zip.asc KEYS
 
 # add scripts
 COPY scripts/ ${ROCKETMQ_HOME}/bin/
 
-#
-RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
-   && cd ${ROCKETMQ_HOME}/bin/  \
-   && ls -alF  \
-   && mkdir -p /etc/rocketmq \
-   && cp -rf ${ROCKETMQ_HOME}/conf/broker.conf  /etc/rocketmq/ \
-   && mv ${ROCKETMQ_HOME}/conf/broker.conf ${ROCKETMQ_HOME}/conf/broker.conf.old \
-   && mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh  \
-   && mv -bf ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh  \
-   && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
-   && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker \
-   && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
-   && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
-   && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker.sh \
-   && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver.sh \
-   && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker-customize.sh \
-   && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver-customize.sh
+RUN chown -R ${uid}:${gid} ${ROCKETMQ_HOME}
 
+# expose namesrv port
+EXPOSE 9876
+
+# add customized scripts for namesrv
+RUN mv ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
+ && chmod a+x ${ROCKETMQ_HOME}/bin/runserver.sh \
+ && chmod a+x ${ROCKETMQ_HOME}/bin/mqnamesrv
+
+# expose broker ports
+EXPOSE 10909 10911 10912
+
+# add customized scripts for broker
+RUN mv ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
+ && chmod a+x ${ROCKETMQ_HOME}/bin/runbroker.sh \
+ && chmod a+x ${ROCKETMQ_HOME}/bin/mqbroker
+
+# export Java options
+RUN export JAVA_OPT=" -Duser.home=/opt"
+
+# Add ${JAVA_HOME}/lib/ext as java.ext.dirs
 RUN sed -i 's/${JAVA_HOME}\/jre\/lib\/ext/${JAVA_HOME}\/jre\/lib\/ext:${JAVA_HOME}\/lib\/ext/' ${ROCKETMQ_HOME}/bin/tools.sh
 
-# broker 配置文件位于 /etc/rocketmq/broker.conf ，具体请看 broker Dockerfile CMD启动
+USER ${user}
 
-VOLUME /opt/logs /opt/store
+WORKDIR ${ROCKETMQ_HOME}/bin

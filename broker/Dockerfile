@@ -24,8 +24,6 @@ EXPOSE 10909 10911
 # && chmod +x ${ROCKETMQ_HOME}/bin/mqbroker
 
 CMD cd ${ROCKETMQ_HOME}/bin \
- && export JAVA_OPT=" -Duser.home=/opt" \
- && export NAMESRV_ADDR="namesrv:9876" \
  && ${ROCKETMQ_HOME}/bin/mqbroker -c /etc/rocketmq/broker.conf
 
 
