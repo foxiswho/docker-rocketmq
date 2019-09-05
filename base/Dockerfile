@@ -20,10 +20,14 @@
 FROM centos:7
 
 # Rocketmq version
-ENV ROCKETMQ_VERSION "4.5.1"
+ENV ROCKETMQ_VERSION "4.5.2"
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
+
+ENV NAMESRV_ADDR "namesrv:9876"
+
+ENV JAVA_OPT " -Duser.home=/opt "
 
 #tme zone
 RUN rm -rf /etc/localtime \
