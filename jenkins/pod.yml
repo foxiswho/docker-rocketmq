@@ -36,8 +36,14 @@ spec:
           volumeMounts:
             - name: vol-home
               mountPath: /var/jenkins_home
+            - name: vol-home
+              mountPath: /backup
       volumes:
         - name: vol-home
           hostPath:
             path: /www/k8s/foxdev/jenkins/home
             type: Directory
+        - name: vol-home
+          hostPath:
+              path: /www/k8s/foxdev/jenkins/backup
+              type: Directory
