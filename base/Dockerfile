@@ -69,7 +69,7 @@ RUN chown -R ${uid}:${gid} ${ROCKETMQ_HOME}
 EXPOSE 9876
 
 # add customized scripts for namesrv
-RUN mv ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
+RUN rm -rf ${ROCKETMQ_HOME}/bin/runserver.sh && mv ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/runserver.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/mqnamesrv
 
@@ -77,7 +77,7 @@ RUN mv ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserve
 EXPOSE 10909 10911 10912
 
 # add customized scripts for broker
-RUN mv ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
+RUN rm -rf ${ROCKETMQ_HOME}/bin/runbroker.sh &&  mv ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/runbroker.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/mqbroker
 
