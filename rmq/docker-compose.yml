@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   rmqnamesrv:
-    image: foxiswho/rocketmq:server
+    image: foxiswho/rocketmq:server-4.5.2
     container_name: rmqnamesrv
     ports:
       - 9876:9876
@@ -16,7 +16,7 @@ services:
           aliases:
             - rmqnamesrv
   rmqbroker:
-    image: foxiswho/rocketmq:broker
+    image: foxiswho/rocketmq:broker-4.5.2
     container_name: rmqbroker
     ports:
       - 10909:10909
@@ -26,9 +26,8 @@ services:
       - ./rmq/store:/opt/store
       - ./rmq/brokerconf/broker.conf:/etc/rocketmq/broker.conf
     environment:
-        NAMESRV_ADDR: "rmqnamesrv:9876"
         JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms128m -Xmx128m -Xmn128m"
-    command: mqbroker -c /etc/rocketmq/broker.conf
+    command: ["/bin/bash","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
     depends_on:
       - rmqnamesrv
     networks:
