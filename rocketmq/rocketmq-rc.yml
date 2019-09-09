@@ -23,17 +23,17 @@ spec:
           resources:
             limits:
               cpu: 450m
-              memory: 1000Mi
+              memory: 2000Mi
             requests:
               cpu: 400m
-              memory: 768Mi
+              memory: 2000Mi
           env:
             - name: TZ
               value: Asia/Shanghai
             - name: JAVA_OPT
               value: -Duser.home=/opt
             - name: JAVA_OPT_EXT
-              value: -server -Xms768m -Xmx768m -Xmn256m
+              value: -server -Xms2000m -Xmx2000m -Xmn256m
           ports:
             - containerPort: 9876
           volumeMounts:
