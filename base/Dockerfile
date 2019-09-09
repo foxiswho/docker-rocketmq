@@ -36,8 +36,6 @@ ARG gid=3000
 RUN groupadd -g ${gid} ${group} \
     && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
-ENV JAVA_OPT       " -Duser.home=/opt "
-ENV NAMESRV_ADDR   "namesrv:9876"
 
 # Rocketmq version
 ENV ROCKETMQ_VERSION 4.5.2
