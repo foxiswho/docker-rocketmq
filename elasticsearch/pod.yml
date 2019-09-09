@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: elasticsearch
-          image: foxiswho/elk:elasticsearch-7.2.0
+          image: foxiswho/elk:elasticsearch-7.3.1
           imagePullPolicy: Always
           resources:
             limits:
@@ -26,12 +26,12 @@ spec:
               memory: 3Gi
             requests:
               cpu: 400m
-              memory: 2Gi
+              memory: 3Gi
           env:
             - name: TZ
               value: Asia/Shanghai
             - name: ES_JAVA_OPTS
-              value: -Xmx2000m -Xmx2000m
+              value: -Xmx3000m -Xms3000m
           ports:
             - containerPort: 9200
             - containerPort: 9300
@@ -40,8 +40,8 @@ spec:
               mountPath: /usr/share/elasticsearch/logs
             - name: vol-data
               mountPath: /usr/share/elasticsearch/data
-#            - name: vol-plugins-analysis-ik-conf
-#              mountPath: /usr/share/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
+            - name: vol-plugins-analysis-ik-conf
+              mountPath: /usr/share/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
             - name: vol-es
               mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
             - name: vol-synonyms
@@ -55,10 +55,10 @@ spec:
           hostPath:
               path: /www/k8s/foxdev/elasticsearch/data
               type: Directory
-#        - name: vol-plugins-analysis-ik-conf
-#          hostPath:
-#              path: /www/k8s/foxdev/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
-#              type: File
+        - name: vol-plugins-analysis-ik-conf
+          hostPath:
+              path: /www/k8s/foxdev/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
+              type: File
         - name: vol-es
           hostPath:
               path: /www/k8s/foxdev/elasticsearch/config/elasticsearch.yml
