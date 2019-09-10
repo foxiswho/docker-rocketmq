@@ -31,7 +31,7 @@ spec:
             - name: TZ
               value: Asia/Shanghai
             - name: ES_JAVA_OPTS
-              value: -Xmx3000m -Xms3000m
+              value: -Xmx2000m -Xms2000m
           ports:
             - containerPort: 9200
             - containerPort: 9300
