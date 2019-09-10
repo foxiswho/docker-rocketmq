@@ -21,11 +21,13 @@ spec:
           image: hyper/docker-registry-web
           resources:
             limits:
-              cpu: 350m
-              memory: 1024Mi
+              cpu: 400m
+              memory: 768Mi
             requests:
-              cpu: 300m
-              memory: 512Mi
+              cpu: 400m
+              memory: 768Mi
+          ports:
+            - containerPort: 8080
           env:
             - name: TZ
               value: Asia/Shanghai
@@ -34,8 +36,6 @@ spec:
             - name: REGISTRY_NAME
               value: http://192.168.0.254:5000
             - name: REGISTRY_READONLY
-              value: false
+              value: "false"
             - name: REGISTRY_STORAGE_DELETE_ENABLED
-              value: true
-          ports:
-            - containerPort: 8080
+              value: "true"
