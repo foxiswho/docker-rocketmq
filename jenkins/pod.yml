@@ -26,7 +26,7 @@ spec:
               memory: 4048Mi
             requests:
               cpu: 400m
-              memory: 2048Mi
+              memory: 4048Mi
           env:
             - name: TZ
               value: Asia/Shanghai
