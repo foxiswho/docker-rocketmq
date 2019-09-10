@@ -30,8 +30,6 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
-            - name: NAMESRV_ADDR
-              value: rocketmq:9876
             - name: JAVA_OPT_EXT
               value:  -Duser.home=/opt -server -Xms2000m -Xmx2000m
           command: ["/bin/bash","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rocketmq:9876","autoCreateTopicEnable=true"]
