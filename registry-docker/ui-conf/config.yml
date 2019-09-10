@@ -1,0 +1,10 @@
+registry:
+  # Docker registry url
+  url: http://registry-0.registry.default.svc.cluster.local:5000/v2
+  # Docker registry fqdn
+  name: 192.168.0.254:5000
+  # To allow image delete, should be false
+  readonly: false
+  auth:
+    # Disable authentication
+    enabled: false

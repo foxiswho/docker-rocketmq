@@ -50,5 +50,5 @@ Get https://192.168.0.254:5000/v2/: http: server gave HTTP response to HTTPS cli
 
 在 Docker Desktop    的 Daemon 选项卡 中 `insecure registries` 区域增加
 ```bash
-192.168.1.100:5000
+192.168.0.254:5000
 ```
