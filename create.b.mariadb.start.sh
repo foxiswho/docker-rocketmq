@@ -63,7 +63,8 @@ sleep 20s
 kubectl get pod
 
 echo -e "开始 导入 nacos-mysql.sql 数据"
-echo -e "创建 nacos 用户，密码为 nacos"
+#echo -e "创建 nacos 用户，密码为 nacos"
+echo -e "直接使用 数据库默认用户及密码   root/root"
 echo -e "创建 库 nacos_devtest "
 
 # 导入数据库SQL
