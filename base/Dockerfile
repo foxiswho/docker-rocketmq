@@ -67,7 +67,7 @@ RUN chown -R ${uid}:${gid} ${ROCKETMQ_HOME}
 EXPOSE 9876
 
 # add customized scripts for namesrv
-RUN rm -rf ${ROCKETMQ_HOME}/bin/runserver.sh && mv ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
+RUN mv -bf ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/runserver.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/mqnamesrv
 
@@ -75,9 +75,17 @@ RUN rm -rf ${ROCKETMQ_HOME}/bin/runserver.sh && mv ${ROCKETMQ_HOME}/bin/runserve
 EXPOSE 10909 10911 10912
 
 # add customized scripts for broker
-RUN rm -rf ${ROCKETMQ_HOME}/bin/runbroker.sh &&  mv ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
+RUN mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/runbroker.sh \
- && chmod a+x ${ROCKETMQ_HOME}/bin/mqbroker
+ && chmod a+x ${ROCKETMQ_HOME}/bin/mqbroker \
+ && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
+    && ln -s ${ROCKETMQ_HOME}/bin/runbroker /usr/local/bin/runbroker \
+    && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
+    && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker \
+    && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker.sh \
+    && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver.sh \
+    && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker-customize.sh \
+    && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver-customize.sh
 
 # export Java options
 RUN export JAVA_OPT=" -Duser.home=/opt"
