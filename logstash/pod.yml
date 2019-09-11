@@ -44,7 +44,7 @@ spec:
           hostPath:
             path: /www/k8s/foxdev/logstash/config/logstash.yml
             type: File
-        - name: vol-conf
+        - name: vol-logs
           hostPath:
               path: /www/k8s/foxdev/logstash/logs
               type: Directory
