@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: logstash
+  labels:
+    app: logstash
+#  namespace: default
+spec:
+  serviceName: logstash
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: foxiswho/elk:logstash-7.3.1
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 450m
+              memory: 1024Mi
+            requests:
+              cpu: 400m
+              memory: 768Mi
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          ports:
+            - containerPort: 5621
+          volumeMounts:
+            - name: vol-conf
+              mountPath: /usr/share/logstash/config/logstash.yml
+            - name: vol-logs
+              mountPath: /usr/share/logstash/logs
+            - name: vol-pipeline
+              mountPath: /usr/share/logstash/pipeline
+      volumes:
+        - name: vol-conf
+          hostPath:
+            path: /www/k8s/foxdev/logstash/config/logstash.yml
+            type: File
+        - name: vol-conf
+          hostPath:
+              path: /www/k8s/foxdev/logstash/logs
+              type: Directory
+        - name: vol-pipeline
+          hostPath:
+              path: /www/k8s/foxdev/logstash/pipeline
+              type: Directory
