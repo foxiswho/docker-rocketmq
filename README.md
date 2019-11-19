@@ -60,7 +60,8 @@ foxiswho/rocketmq:broker
 /etc/rocketmq/broker.conf
 ```
 
-### 使用自己的配置文件
+### 如果要使用自己的配置文件
+如果要使用自己的配置文件，那么先把你以前创建好的 容器 `rmqbroker` ，先删除 然后再执行 如下
 请全部复制到shell 中执行
 ```SHELL
 docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:rmqserver \
