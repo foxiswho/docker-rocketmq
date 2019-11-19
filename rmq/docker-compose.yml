@@ -7,8 +7,8 @@ services:
     ports:
       - 9876:9876
     volumes:
-      - ./rmq/logs:/opt/logs
-      - ./rmq/store:/opt/store
+      - ./rmqs/logs:/opt/logs
+      - ./rmqs/store:/opt/store
     environment:
       JAVA_OPT_EXT: "-Duser.home=/opt -Xms128m -Xmx128m -Xmn128m"
     networks:
