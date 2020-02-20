@@ -57,7 +57,7 @@ RUN set -eux; \
     unzip rocketmq.zip ; \
 	mv rocketmq-all*/* . ; \
 	rmdir rocketmq-all*  ; \
-	rm rocketmq.zip rocketmq.zip.asc KEYS
+	rm -rf rocketmq.zip rocketmq.zip.asc KEYS
 
 # add scripts
 COPY scripts/ ${ROCKETMQ_HOME}/bin/
