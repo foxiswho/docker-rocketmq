@@ -38,7 +38,7 @@ RUN groupadd -g ${gid} ${group} \
 
 
 # Rocketmq version
-ENV ROCKETMQ_VERSION 4.5.2
+ENV ROCKETMQ_VERSION 4.6.1
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /home/rocketmq/rocketmq-${ROCKETMQ_VERSION}
