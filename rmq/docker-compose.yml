@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   rmqnamesrv:
-    image: foxiswho/rocketmq:server-4.5.2
+    image: foxiswho/rocketmq:server-4.6.1
     container_name: rmqnamesrv
     ports:
       - 9876:9876
@@ -10,13 +10,13 @@ services:
       - ./rmqs/logs:/opt/logs
       - ./rmqs/store:/opt/store
     environment:
-      JAVA_OPT_EXT: "-Duser.home=/opt -Xms128m -Xmx128m -Xmn128m"
+      JAVA_OPT_EXT: "-Duser.home=/opt -Xms512m -Xms512m -Xmn128m"
     networks:
         rmq:
           aliases:
             - rmqnamesrv
   rmqbroker:
-    image: foxiswho/rocketmq:broker-4.5.2
+    image: foxiswho/rocketmq:broker-4.6.1
     container_name: rmqbroker
     ports:
       - 10909:10909
@@ -26,8 +26,8 @@ services:
       - ./rmq/store:/opt/store
       - ./rmq/brokerconf/broker.conf:/etc/rocketmq/broker.conf
     environment:
-        JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms128m -Xmx128m -Xmn128m"
-    command: ["/bin/bash","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
+        JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms512m -Xms512m -Xmn128m"
+    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
     depends_on:
       - rmqnamesrv
     networks:
