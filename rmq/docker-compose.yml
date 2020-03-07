@@ -10,7 +10,7 @@ services:
       - ./rmqs/logs:/opt/logs
       - ./rmqs/store:/opt/store
     environment:
-      JAVA_OPT_EXT: "-Duser.home=/opt -Xms512m -Xmn512m -Xmn128m"
+      JAVA_OPT_EXT: "-Duser.home=/opt -Xms512M -Xmx512M -Xmn128m"
     networks:
         rmq:
           aliases:
@@ -26,7 +26,7 @@ services:
       - ./rmq/store:/opt/store
       - ./rmq/brokerconf/broker.conf:/etc/rocketmq/broker.conf
     environment:
-        JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms512m -Xmn512m -Xmn128m"
+        JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms512M -Xmx512M -Xmn128m"
     command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
     depends_on:
       - rmqnamesrv
