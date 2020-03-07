@@ -16,7 +16,7 @@ rocketmq Version  4.5.1, 4.5.2 ,4.6.1
 下一个版本镜像 将 不在根据base镜像生成 server，broker  镜像，统一使用  base  镜像，两者区别只是调用的 启动文件不同
 
 
-#一键部署 docker-compose
+# 一键部署 docker-compose
 
 ```SHELL
 git clone  https://github.com/foxiswho/docker-rocketmq.git
