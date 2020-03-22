@@ -3,6 +3,7 @@ version: '3.5'
 services:
   rmqnamesrv:
     image: foxiswho/rocketmq:4.7.0
+#    image: registry.cn-hangzhou.aliyuncs.com/foxiswho/rocketmq:4.7.0
     container_name: rmqnamesrv
     ports:
       - 9876:9876
@@ -11,12 +12,14 @@ services:
       - ./rmqs/store:/opt/store
     environment:
       JAVA_OPT_EXT: "-Duser.home=/opt -Xms512M -Xmx512M -Xmn128m"
+    command: ["sh","mqnamesrv"]
     networks:
         rmq:
           aliases:
             - rmqnamesrv
   rmqbroker:
     image: foxiswho/rocketmq:4.7.0
+#    image: registry.cn-hangzhou.aliyuncs.com/foxiswho/rocketmq:4.7.0
     container_name: rmqbroker
     ports:
       - 10909:10909

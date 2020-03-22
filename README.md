@@ -18,6 +18,7 @@ rocketmq Version  4.5.1, 4.5.2 ,4.6.1 , 4.7.0
 
 
 # 一键部署 docker-compose
+案例 版本 4.7.0
 
 ```SHELL
 git clone  https://github.com/foxiswho/docker-rocketmq.git
