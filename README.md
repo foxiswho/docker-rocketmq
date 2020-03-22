@@ -1,4 +1,5 @@
 # tag
+- 4.7.0
 - server-4.6.1 , broker-4.6.1
 - server-4.5.2 , broker-4.5.2
 - server-4.5.1 , broker-4.5.1
@@ -13,7 +14,7 @@ rocketmq Version  4.5.1, 4.5.2 ,4.6.1 , 4.7.0
 
 # docker-rocketmq 镜像
 
-下一个版本镜像 将 不在根据base镜像生成 server，broker  镜像，统一使用  base  镜像，两者区别只是调用的 启动文件不同
+4.7.0 版本镜像 将 不在根据base镜像生成 server，broker  镜像，统一使用  base  镜像，两者区别只是调用的 启动文件不同
 
 
 # 一键部署 docker-compose
@@ -42,7 +43,7 @@ localhost:8180
 否则报 `com.alibaba.rocketmq.remoting.exception.RemotingConnectException: connect to <172.0.0.120:10909> failed`
 >配置文件 在 `rmq/rmq/brokerconf` 目录下
 
-# 新版 启动
+# rocketmq 4.7.0 新版 启动
 ## server
 ### server 无日志目录映射
 ```bash
