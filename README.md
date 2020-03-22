@@ -9,7 +9,7 @@
 # docker-rocketmq
 rocketmq
 
-rocketmq Version  4.5.1, 4.5.2 ,4.6.1
+rocketmq Version  4.5.1, 4.5.2 ,4.6.1 , 4.7.0
 
 # docker-rocketmq 镜像
 
@@ -42,6 +42,47 @@ localhost:8180
 否则报 `com.alibaba.rocketmq.remoting.exception.RemotingConnectException: connect to <172.0.0.120:10909> failed`
 >配置文件 在 `rmq/rmq/brokerconf` 目录下
 
+# 新版 启动
+## server
+### server 无日志目录映射
+```bash
+docker run -d \
+      --name rmqnamesrv \
+      -p 9876:9876 \
+      foxiswho/rocketmq:4.7.0 \
+      sh mqnamesrv
+```
+### server 有日志目录映射
+```bash
+docker run -d -v $(pwd)/logs:/home/rocketmq/logs \
+      --name rmqnamesrv \
+      -p 9876:9876 \
+      foxiswho/rocketmq:4.7.0 \
+      sh mqnamesrv
+```
+## broker
+### broker 无 目录映射
+```bash
+docker run -d \
+      --name rmqnamesrv \
+      -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
+      -p 9876:9876 \
+      foxiswho/rocketmq:4.7.0 \
+      sh mqnamesrv
+```
+### broker 目录映射
+```bash
+docker run -d  -v $(pwd)/logs:/home/rocketmq/logs -v $(pwd)/store:/home/rocketmq/store \
+      -v $(pwd)/conf:/home/rocketmq/conf \
+      --name rmqbroker \
+      -e "NAMESRV_ADDR=rmqnamesrv:9876" \
+      -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
+      -p 10911:10911 -p 10912:10912 -p 10909:10909 \
+      foxiswho/rocketmq:4.7.0 \
+      sh mqbroker -c /home/rocketmq/conf/broker.conf
+```
+
+# 以下为 4.7.0以前 旧版启动
 # 单个测试案例
 
 
