@@ -50,6 +50,7 @@ localhost:8180
 ```bash
 docker run -d \
       --name rmqnamesrv \
+      -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
       -p 9876:9876 \
       foxiswho/rocketmq:4.7.0 \
       sh mqnamesrv
@@ -58,6 +59,7 @@ docker run -d \
 ```bash
 docker run -d -v $(pwd)/logs:/home/rocketmq/logs \
       --name rmqnamesrv \
+      -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
       -p 9876:9876 \
       foxiswho/rocketmq:4.7.0 \
       sh mqnamesrv
@@ -70,7 +72,7 @@ docker run -d \
       -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
       -p 9876:9876 \
       foxiswho/rocketmq:4.7.0 \
-      sh mqnamesrv
+      sh mqbroker -c /home/rocketmq/conf/broker.conf
 ```
 ### broker 目录映射
 ```bash
