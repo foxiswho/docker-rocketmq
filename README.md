@@ -5,7 +5,9 @@
 - server-4.5.1 , broker-4.5.1
 - server-4.5.0 , broker-4.5.0
 
+# 本镜像使用的是官方的
 
+https://github.com/apache/rocketmq-docker
 
 # docker-rocketmq
 rocketmq
