@@ -9,6 +9,8 @@
 
 https://github.com/apache/rocketmq-docker
 
+官方地址,有问题找官方
+
 # docker-rocketmq
 rocketmq
 

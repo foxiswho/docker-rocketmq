@@ -36,7 +36,7 @@ ARG gid=3000
 RUN groupadd -g ${gid} ${group} \
     && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
-ARG version=4.7.0
+ARG version=4.8.0
 
 # Rocketmq version
 ENV ROCKETMQ_VERSION ${version}
