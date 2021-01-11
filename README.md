@@ -1,4 +1,5 @@
 # tag
+- 4.8.0
 - 4.7.0
 - server-4.6.1 , broker-4.6.1
 - server-4.5.2 , broker-4.5.2
@@ -14,11 +15,11 @@ https://github.com/apache/rocketmq-docker
 # docker-rocketmq
 rocketmq
 
-rocketmq Version  4.5.1, 4.5.2 ,4.6.1 , 4.7.0
+rocketmq Version  4.5.1, 4.5.2 ,4.6.1 , 4.7.0 , 4.8.0
 
 # docker-rocketmq 镜像
 
-4.7.0 版本镜像 将 不在根据base镜像生成 server，broker  镜像，统一使用  base  镜像，两者区别只是调用的 启动文件不同
+4.7.0 及以后 版本镜像 将 不在根据base镜像生成 server，broker  镜像，统一使用  base  镜像，两者区别只是调用的 启动文件不同
 
 
 # 一键部署 docker-compose
@@ -90,41 +91,6 @@ docker run -d  -v $(pwd)/logs:/home/rocketmq/logs -v $(pwd)/store:/home/rocketmq
       sh mqbroker -c /home/rocketmq/conf/broker.conf
 ```
 
-# 以下为 4.7.0以前 旧版启动
-# 单个测试案例
-
-
-## server
-```SHELL
-docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server
-```
-
-## broker
-```SHELL
-docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker \
---link rmqserver:rmqserver \
--e "NAMESRV_ADDR=rmqserver:9876" \
--e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m -Duser.home=/opt" \
-foxiswho/rocketmq:broker
-```
-
-### broker 配置文件位置 (容器内)
-
-```SHELL
-/etc/rocketmq/broker.conf
-```
-
-### 如果要使用自己的配置文件
-如果要使用自己的配置文件，那么先把你以前创建好的 容器 `rmqbroker` ，先删除 然后再执行 如下
-请全部复制到shell 中执行
-```SHELL
-docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker --link rmqserver:rmqserver \
--e "NAMESRV_ADDR=rmqserver:9876" \
--e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m -Duser.home=/opt" \
--v /User/fox/rmq/conf/broker.conf:/etc/rocketmq/broker.conf \
-foxiswho/rocketmq:broker
-```
->/User/fox/rmq/conf/broker.conf 为我的本地配置文件目录，把他替换成你自己的就可以了
 
 注意（重要的事说3遍）
 
