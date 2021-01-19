@@ -8,10 +8,10 @@ services:
     ports:
       - 9876:9876
     volumes:
-      - ./rmqs/logs:/opt/logs
-      - ./rmqs/store:/opt/store
+      - ./rmqs/logs:/home/rocketmq/logs
+      - ./rmqs/store:/home/rocketmq/store
     environment:
-      JAVA_OPT_EXT: "-Duser.home=/opt -Xms512M -Xmx512M -Xmn128m"
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
     command: ["sh","mqnamesrv"]
     networks:
         rmq:
@@ -25,11 +25,11 @@ services:
       - 10909:10909
       - 10911:10911
     volumes:
-      - ./rmq/logs:/opt/logs
-      - ./rmq/store:/opt/store
+      - ./rmq/logs:/home/rocketmq/logs
+      - ./rmq/store:/home/rocketmq/store
       - ./rmq/brokerconf/broker.conf:/etc/rocketmq/broker.conf
     environment:
-        JAVA_OPT_EXT: "-Duser.home=/opt -Xms512M -Xmx512M -Xmn128m"
+        JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
     command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
     depends_on:
       - rmqnamesrv
