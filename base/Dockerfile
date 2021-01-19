@@ -34,7 +34,7 @@ ARG gid=3000
 # If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
 RUN groupadd -g ${gid} ${group} \
-    && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+    && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user} 
 
 ARG version=4.8.0
 
@@ -62,7 +62,10 @@ RUN set -eux; \
 # add scripts
 COPY scripts/ ${ROCKETMQ_HOME}/bin/
 
-RUN chown -R ${uid}:${gid} ${ROCKETMQ_HOME}
+RUN mkdir -p /home/rocketmq/logs \
+    && mkdir -p /home/rocketmq/store \
+    && chown -R ${uid}:${gid} /home/rocketmq \
+    && chown -R ${uid}:${gid} ${ROCKETMQ_HOME}
 
 # expose namesrv port
 EXPOSE 9876
@@ -89,7 +92,7 @@ RUN mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runb
     && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver-customize.sh
 
 # export Java options
-RUN export JAVA_OPT=" -Duser.home=/opt"
+RUN export JAVA_OPT=" -Duser.home=/home/rocketmq"
 
 # Add ${JAVA_HOME}/lib/ext as java.ext.dirs
 RUN sed -i 's/${JAVA_HOME}\/jre\/lib\/ext/${JAVA_HOME}\/jre\/lib\/ext:${JAVA_HOME}\/lib\/ext/' ${ROCKETMQ_HOME}/bin/tools.sh
