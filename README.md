@@ -10,7 +10,9 @@
 # 注意
 映射本地目录权限一定要设置为 777 权限，否则启动不成功
 >映射本地目录权限一定要设置为 777 权限，否则启动不成功
+>
 >映射本地目录权限一定要设置为 777 权限，否则启动不成功
+>
 
 # 本镜像使用的是官方的
 
@@ -75,6 +77,7 @@ docker run -d -v $(pwd)/logs:/home/rocketmq/logs \
       foxiswho/rocketmq:4.8.0 \
       sh mqnamesrv
 ```
+本地 logs 目录一定要是 777 权限
 ## broker
 ### broker 无 目录映射
 ```bash
@@ -105,7 +108,8 @@ docker run -d  -v $(pwd)/logs:/home/rocketmq/logs -v $(pwd)/store:/home/rocketmq
 注意（重要的事说3遍）
 
 >如果你的微服务没有使用`docker`,那么需要把`/etc/rocketmq/broker.conf` 配置文件中的`brokerIP1=192.168.0.253` 这个启用，IP 地址填写 你docker 所在 宿主机的IP ，否则报错
-
+>
+>本地 logs 目录一定要是 777 权限
 
 ## console
 来自
