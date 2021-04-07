@@ -5,6 +5,9 @@
 - server-4.5.2 , broker-4.5.2
 - server-4.5.1 , broker-4.5.1
 - server-4.5.0 , broker-4.5.0
+
+推荐使用最新版
+
 # 注意
 # 注意
 # 注意
