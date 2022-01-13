@@ -94,22 +94,23 @@ docker run -d -v $(pwd)/logs:/home/rocketmq/logs \
 ### broker 无 目录映射
 ```bash
 docker run -d \
-      --name rmqnamesrv \
+      --name rmqbroker --link rmqnamesrv:rmqserver \
+      -e "NAMESRV_ADDR=rmqnamesrv:9876" \
       -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
       -p 9876:9876 \
       foxiswho/rocketmq:4.8.0 \
-      sh mqbroker -c /home/rocketmq/conf/broker.conf
+      sh mqbroker -c /home/rocketmq/rocketmq-4.8.0/conf/broker.conf
 ```
 ### broker 目录映射
 ```bash
 docker run -d  -v $(pwd)/logs:/home/rocketmq/logs -v $(pwd)/store:/home/rocketmq/store \
       -v $(pwd)/conf:/home/rocketmq/conf \
-      --name rmqbroker \
+      --name rmqbroker --link rmqnamesrv:rmqserver \
       -e "NAMESRV_ADDR=rmqnamesrv:9876" \
       -e "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m" \
       -p 10911:10911 -p 10912:10912 -p 10909:10909 \
       foxiswho/rocketmq:4.8.0 \
-      sh mqbroker -c /home/rocketmq/conf/broker.conf
+      sh mqbroker -c /home/rocketmq/rocketmq-4.8.0/conf/broker.conf
 ```
 
 
@@ -128,7 +129,7 @@ docker run -d  -v $(pwd)/logs:/home/rocketmq/logs -v $(pwd)/store:/home/rocketmq
 https://hub.docker.com/r/styletang/rocketmq-console-ng/
 
 ```SEHLL
-docker run --name rmqconsole --link rmqserver:rmqserver \
+docker run -d --name rmqconsole --link rmqnamesrv:rmqserver \
 -e "JAVA_OPTS=-Drocketmq.namesrv.addr=rmqserver:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" \
 -p 8180:8080 -t styletang/rocketmq-console-ng
 ```
@@ -140,7 +141,7 @@ localhost:8180
 
 Example:
 ```SEHLL
-docker run --name rmqconsole --link rmqserver:namesrv \
+docker run -d --name rmqconsole --link rmqnamesrv:namesrv \
 -e "JAVA_OPTS=-Drocketmq.namesrv.addr=rmqserver:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" \
 -p 8180:8080 -t styletang/rocketmq-console-ng
 ```
