@@ -50,6 +50,15 @@ chmod +x  start.sh
 
 ```
 
+>感谢 nary24 
+>不能设置权限777的同学可以设置如下
+>chown 3000:3000 ./rmqs/logs
+chown 3000:3000 ./rmqs/store
+chown 3000:3000 ./rmq/logs
+chown 3000:3000 ./rmq/store
+
+
+
 访问浏览器
 ```SHELL
 localhost:8180
