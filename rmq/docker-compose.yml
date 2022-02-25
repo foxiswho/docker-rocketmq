@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   rmqnamesrv:
-    image: foxiswho/rocketmq:4.8.0
+    image: foxiswho/rocketmq:4.9.2
 #    image: registry.cn-hangzhou.aliyuncs.com/foxiswho/rocketmq:4.7.0
     container_name: rmqnamesrv
     ports:
@@ -18,7 +18,7 @@ services:
           aliases:
             - rmqnamesrv
   rmqbroker:
-    image: foxiswho/rocketmq:4.8.0
+    image: foxiswho/rocketmq:4.9.2
 #    image: registry.cn-hangzhou.aliyuncs.com/foxiswho/rocketmq:4.7.0
     container_name: rmqbroker
     ports:

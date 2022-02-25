@@ -36,7 +36,7 @@ ARG gid=3000
 RUN groupadd -g ${gid} ${group} \
     && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user} 
 
-ARG version=4.8.0
+ARG version=4.9.2
 
 # Rocketmq version
 ENV ROCKETMQ_VERSION ${version}
@@ -62,24 +62,17 @@ RUN set -eux; \
 # add scripts
 COPY scripts/ ${ROCKETMQ_HOME}/bin/
 
+# add customized scripts for namesrv
+# add customized scripts for broker
 RUN mkdir -p /home/rocketmq/logs \
     && mkdir -p /home/rocketmq/store \
     && chown -R ${uid}:${gid} /home/rocketmq \
-    && chown -R ${uid}:${gid} ${ROCKETMQ_HOME}
-
-# expose namesrv port
-EXPOSE 9876
-
-# add customized scripts for namesrv
-RUN mv -bf ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
+    && chown -R ${uid}:${gid} ${ROCKETMQ_HOME} \
+ && mv -bf ${ROCKETMQ_HOME}/bin/runserver-customize.sh ${ROCKETMQ_HOME}/bin/runserver.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/runserver.sh \
- && chmod a+x ${ROCKETMQ_HOME}/bin/mqnamesrv
-
-# expose broker ports
-EXPOSE 10909 10911 10912
-
-# add customized scripts for broker
-RUN mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
+ && chmod a+x ${ROCKETMQ_HOME}/bin/mqnamesrv \
+ && mkdir -p /etc/rocketmq \
+ && mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runbroker.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/runbroker.sh \
  && chmod a+x ${ROCKETMQ_HOME}/bin/mqbroker \
  && ln -s ${ROCKETMQ_HOME}/bin/mqadmin /usr/local/bin/mqadmin  \
@@ -90,12 +83,14 @@ RUN mv -bf ${ROCKETMQ_HOME}/bin/runbroker-customize.sh ${ROCKETMQ_HOME}/bin/runb
     && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver.sh \
     && ln -s ${ROCKETMQ_HOME}/bin/runbroker.sh /usr/local/bin/runbroker-customize.sh \
     && ln -s ${ROCKETMQ_HOME}/bin/runserver.sh /usr/local/bin/runserver-customize.sh
+# expose namesrv port
+# expose broker ports
+EXPOSE 9876 10909 10911 10912
 
 # export Java options
-RUN export JAVA_OPT=" -Duser.home=/home/rocketmq"
-
 # Add ${JAVA_HOME}/lib/ext as java.ext.dirs
-RUN sed -i 's/${JAVA_HOME}\/jre\/lib\/ext/${JAVA_HOME}\/jre\/lib\/ext:${JAVA_HOME}\/lib\/ext/' ${ROCKETMQ_HOME}/bin/tools.sh
+RUN export JAVA_OPT=" -Duser.home=/home/rocketmq" \
+ && sed -i 's/${JAVA_HOME}\/jre\/lib\/ext/${JAVA_HOME}\/jre\/lib\/ext:${JAVA_HOME}\/lib\/ext/' ${ROCKETMQ_HOME}/bin/tools.sh
 
 USER ${user}
 
